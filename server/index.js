@@ -70,6 +70,8 @@ function initDatabase() {
       stars INTEGER DEFAULT 0,
       level INTEGER DEFAULT 1,
       pin TEXT UNIQUE,
+      email TEXT,
+      avatar_url TEXT,
       created_at TEXT DEFAULT (datetime('now'))
     );
 
@@ -165,6 +167,22 @@ try {
 } catch {
   db.exec("ALTER TABLE sessions ADD COLUMN last_activity TEXT DEFAULT (datetime('now'))");
   console.log('Added last_activity column to sessions table');
+}
+
+// Add email column to students if missing
+try {
+  db.prepare("SELECT email FROM students LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE students ADD COLUMN email TEXT");
+  console.log('Added email column to students table');
+}
+
+// Add avatar_url column to students if missing
+try {
+  db.prepare("SELECT avatar_url FROM students LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE students ADD COLUMN avatar_url TEXT");
+  console.log('Added avatar_url column to students table');
 }
 
 // Auto-generate PINs for existing students that don't have one
@@ -709,6 +727,69 @@ app.get('/api/auth/verify/:pin', (req, res) => {
   } catch (error) {
     console.error('Error verifying PIN:', error);
     res.status(500).json({ error: 'Verifikasi gagal' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Google Sign-In authentication
+// ---------------------------------------------------------------------------
+app.post('/api/auth/google', async (req, res) => {
+  try {
+    const { id_token } = req.body;
+
+    if (!id_token) {
+      return res.status(400).json({ error: 'id_token is required' });
+    }
+
+    // Verify the Google ID token via Google's tokeninfo endpoint
+    const tokenRes = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(id_token)}`
+    );
+
+    if (!tokenRes.ok) {
+      return res.status(401).json({ error: 'Token Google tidak valid' });
+    }
+
+    const tokenInfo = await tokenRes.json();
+    const { email, name, picture } = tokenInfo;
+
+    if (!email) {
+      return res.status(401).json({ error: 'Token tidak mengandung email' });
+    }
+
+    // Look up student by email
+    let student = db.prepare('SELECT * FROM students WHERE email = ?').get(email);
+
+    if (!student) {
+      // Auto-create a new student from Google profile
+      const result = db.prepare(`
+        INSERT INTO students (name, email, avatar_url, grade, stars, level, pin)
+        VALUES (?, ?, ?, '', 0, 1, NULL)
+      `).run(name || email.split('@')[0], email, picture || null);
+
+      student = db.prepare('SELECT * FROM students WHERE id = ?').get(result.lastInsertRowid);
+    } else {
+      // Update avatar_url and name if they changed
+      db.prepare(`
+        UPDATE students SET avatar_url = ?, name = ? WHERE id = ?
+      `).run(picture || student.avatar_url, name || student.name, student.id);
+
+      student = db.prepare('SELECT * FROM students WHERE id = ?').get(student.id);
+    }
+
+    // Create a new session record
+    const session = db.prepare(`
+      INSERT INTO sessions (student_id, started_at, last_activity)
+      VALUES (?, datetime('now'), datetime('now'))
+    `).run(student.id);
+
+    res.json({
+      student,
+      session_id: session.lastInsertRowid,
+    });
+  } catch (error) {
+    console.error('Error during Google login:', error);
+    res.status(500).json({ error: 'Google login gagal' });
   }
 });
 

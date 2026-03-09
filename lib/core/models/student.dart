@@ -11,6 +11,8 @@ class Student {
   final int stars;
   final int level;
   final String pin;
+  final String? email;
+  final String? avatarUrl;
 
   Student({
     required this.id,
@@ -19,6 +21,8 @@ class Student {
     this.stars = 0,
     this.level = 1,
     this.pin = '',
+    this.email,
+    this.avatarUrl,
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {
@@ -29,6 +33,8 @@ class Student {
       stars: json['stars'] ?? 0,
       level: json['level'] ?? 1,
       pin: json['pin'] ?? '',
+      email: json['email'],
+      avatarUrl: json['avatar_url'] ?? json['avatarUrl'],
     );
   }
 
@@ -39,6 +45,8 @@ class Student {
         'stars': stars,
         'level': level,
         'pin': pin,
+        'email': email,
+        'avatar_url': avatarUrl,
       };
 }
 
@@ -77,6 +85,32 @@ class StudentProvider extends ChangeNotifier {
         return 'PIN salah, coba lagi ya!';
       } else {
         return 'Login gagal, coba lagi.';
+      }
+    } catch (e) {
+      return 'Tidak bisa terhubung ke server.';
+    }
+  }
+
+  /// Google Sign-In: sends ID token to server for verification
+  Future<String?> loginWithGoogle(String idToken) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/api/auth/google'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'id_token': idToken}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        _student = Student.fromJson(data['student']);
+        _sessionId = data['session_id'];
+        await _saveToDisk();
+        _resetIdleTimer();
+        notifyListeners();
+        return null; // success
+      } else {
+        final data = jsonDecode(response.body);
+        return data['error'] ?? 'Login gagal, coba lagi.';
       }
     } catch (e) {
       return 'Tidak bisa terhubung ke server.';
@@ -147,6 +181,8 @@ class StudentProvider extends ChangeNotifier {
         stars: newStars,
         level: (newStars ~/ 50) + 1,
         pin: _student!.pin,
+        email: _student!.email,
+        avatarUrl: _student!.avatarUrl,
       );
       await _saveToDisk();
       notifyListeners();
