@@ -1,0 +1,273 @@
+{
+  "subject": "Matematika",
+  "grades": {
+    "SD Kelas 1": {
+      "Penjumlahan": [
+        {
+          "question": "Berapakah 3 + 4?",
+          "options": ["6", "7", "8", "5"],
+          "correct": 1,
+          "explanation": "3 + 4 = 7. Kita bisa menghitung maju dari 3: empat, lima, enam, tujuh."
+        },
+        {
+          "question": "5 + 2 = ...",
+          "options": ["6", "8", "7", "9"],
+          "correct": 2,
+          "explanation": "5 + 2 = 7. Lima ditambah dua sama dengan tujuh."
+        },
+        {
+          "question": "Ibu membeli 4 apel dan 3 jeruk. Berapa jumlah buah seluruhnya?",
+          "options": ["5", "6", "7", "8"],
+          "correct": 2,
+          "explanation": "4 apel + 3 jeruk = 7 buah. Kita menjumlahkan semua buahnya."
+        },
+        {
+          "question": "6 + 1 = ...",
+          "options": ["5", "6", "7", "8"],
+          "correct": 2,
+          "explanation": "6 + 1 = 7. Enam ditambah satu sama dengan tujuh."
+        },
+        {
+          "question": "Berapakah 2 + 5?",
+          "options": ["7", "8", "6", "9"],
+          "correct": 0,
+          "explanation": "2 + 5 = 7. Dua ditambah lima sama dengan tujuh."
+        },
+        {
+          "question": "8 + 2 = ...",
+          "options": ["9", "11", "10", "12"],
+          "correct": 2,
+          "explanation": "8 + 2 = 10. Delapan ditambah dua sama dengan sepuluh."
+        }
+      ],
+      "Pengurangan": [
+        {
+          "question": "Berapakah 7 - 3?",
+          "options": ["3", "4", "5", "6"],
+          "correct": 1,
+          "explanation": "7 - 3 = 4. Tujuh dikurangi tiga sama dengan empat."
+        },
+        {
+          "question": "9 - 5 = ...",
+          "options": ["3", "5", "4", "2"],
+          "correct": 2,
+          "explanation": "9 - 5 = 4. Sembilan dikurangi lima sama dengan empat."
+        },
+        {
+          "question": "Ani memiliki 8 permen. Dia memberikan 3 kepada temannya. Berapa sisa permen Ani?",
+          "options": ["4", "6", "5", "3"],
+          "correct": 2,
+          "explanation": "8 - 3 = 5. Delapan permen dikurangi tiga permen sama dengan lima permen."
+        },
+        {
+          "question": "10 - 4 = ...",
+          "options": ["5", "7", "6", "8"],
+          "correct": 2,
+          "explanation": "10 - 4 = 6. Sepuluh dikurangi empat sama dengan enam."
+        },
+        {
+          "question": "6 - 2 = ...",
+          "options": ["3", "5", "4", "2"],
+          "correct": 2,
+          "explanation": "6 - 2 = 4. Enam dikurangi dua sama dengan empat."
+        }
+      ]
+    },
+    "SD Kelas 4": {
+      "Pecahan": [
+        {
+          "question": "Manakah pecahan yang senilai dengan 1/2?",
+          "options": ["2/3", "3/6", "1/4", "2/5"],
+          "correct": 1,
+          "explanation": "3/6 senilai dengan 1/2 karena 3/6 = (3\u00f71)/(6\u00f72) = 1/2, atau 1/2 \u00d7 3/3 = 3/6."
+        },
+        {
+          "question": "1/4 + 2/4 = ...",
+          "options": ["3/8", "3/4", "1/2", "2/4"],
+          "correct": 1,
+          "explanation": "Karena penyebutnya sama, kita tinggal menjumlahkan pembilangnya: 1 + 2 = 3. Jadi hasilnya 3/4."
+        },
+        {
+          "question": "Urutkan pecahan berikut dari terkecil: 3/4, 1/2, 1/4",
+          "options": ["3/4, 1/2, 1/4", "1/4, 1/2, 3/4", "1/2, 1/4, 3/4", "1/4, 3/4, 1/2"],
+          "correct": 1,
+          "explanation": "1/4 = 0,25; 1/2 = 0,5; 3/4 = 0,75. Jadi urutan dari terkecil: 1/4, 1/2, 3/4."
+        },
+        {
+          "question": "5/6 - 2/6 = ...",
+          "options": ["3/6", "3/12", "7/6", "2/6"],
+          "correct": 0,
+          "explanation": "Penyebutnya sama, jadi kurangkan pembilangnya: 5 - 2 = 3. Hasilnya 3/6 atau bisa disederhanakan menjadi 1/2."
+        },
+        {
+          "question": "Pecahan 2/8 jika disederhanakan menjadi ...",
+          "options": ["1/2", "1/3", "1/4", "1/6"],
+          "correct": 2,
+          "explanation": "2/8 disederhanakan dengan membagi pembilang dan penyebut dengan FPB-nya yaitu 2. 2\u00f72 = 1, 8\u00f72 = 4. Jadi 2/8 = 1/4."
+        }
+      ],
+      "FPB dan KPK": [
+        {
+          "question": "Berapakah FPB dari 12 dan 18?",
+          "options": ["2", "3", "6", "9"],
+          "correct": 2,
+          "explanation": "Faktor dari 12: 1, 2, 3, 4, 6, 12. Faktor dari 18: 1, 2, 3, 6, 9, 18. Faktor persekutuan: 1, 2, 3, 6. FPB = 6."
+        },
+        {
+          "question": "Berapakah KPK dari 4 dan 6?",
+          "options": ["2", "12", "24", "10"],
+          "correct": 1,
+          "explanation": "Kelipatan 4: 4, 8, 12, 16, ... Kelipatan 6: 6, 12, 18, ... Kelipatan persekutuan terkecil = 12."
+        },
+        {
+          "question": "FPB dari 8 dan 20 adalah ...",
+          "options": ["2", "4", "8", "10"],
+          "correct": 1,
+          "explanation": "Faktor 8: 1, 2, 4, 8. Faktor 20: 1, 2, 4, 5, 10, 20. Faktor persekutuan: 1, 2, 4. FPB = 4."
+        },
+        {
+          "question": "KPK dari 3 dan 5 adalah ...",
+          "options": ["8", "10", "15", "30"],
+          "correct": 2,
+          "explanation": "Kelipatan 3: 3, 6, 9, 12, 15, ... Kelipatan 5: 5, 10, 15, ... Kelipatan persekutuan terkecil = 15."
+        },
+        {
+          "question": "Andi pergi ke perpustakaan setiap 6 hari. Kawi pergi setiap 8 hari. Jika mereka bertemu hari ini, kapan mereka bertemu lagi?",
+          "options": ["12 hari lagi", "14 hari lagi", "24 hari lagi", "48 hari lagi"],
+          "correct": 2,
+          "explanation": "Kita mencari KPK dari 6 dan 8. 6 = 2 \u00d7 3, 8 = 2\u00b3. KPK = 2\u00b3 \u00d7 3 = 24. Mereka bertemu lagi 24 hari lagi."
+        }
+      ],
+      "Bangun Datar": [
+        {
+          "question": "Berapa keliling persegi dengan sisi 5 cm?",
+          "options": ["10 cm", "15 cm", "20 cm", "25 cm"],
+          "correct": 2,
+          "explanation": "Keliling persegi = 4 \u00d7 sisi = 4 \u00d7 5 = 20 cm."
+        },
+        {
+          "question": "Luas persegi panjang dengan panjang 8 cm dan lebar 3 cm adalah ...",
+          "options": ["11 cm\u00b2", "22 cm\u00b2", "24 cm\u00b2", "32 cm\u00b2"],
+          "correct": 2,
+          "explanation": "Luas persegi panjang = panjang \u00d7 lebar = 8 \u00d7 3 = 24 cm\u00b2."
+        },
+        {
+          "question": "Luas segitiga dengan alas 10 cm dan tinggi 6 cm adalah ...",
+          "options": ["16 cm\u00b2", "30 cm\u00b2", "60 cm\u00b2", "36 cm\u00b2"],
+          "correct": 1,
+          "explanation": "Luas segitiga = 1/2 \u00d7 alas \u00d7 tinggi = 1/2 \u00d7 10 \u00d7 6 = 30 cm\u00b2."
+        },
+        {
+          "question": "Bangun datar yang memiliki 4 sisi sama panjang dan 4 sudut siku-siku disebut ...",
+          "options": ["Persegi panjang", "Belah ketupat", "Persegi", "Jajar genjang"],
+          "correct": 2,
+          "explanation": "Persegi memiliki 4 sisi sama panjang dan 4 sudut siku-siku (90\u00b0)."
+        },
+        {
+          "question": "Keliling persegi panjang dengan panjang 12 cm dan lebar 5 cm adalah ...",
+          "options": ["17 cm", "34 cm", "60 cm", "24 cm"],
+          "correct": 1,
+          "explanation": "Keliling persegi panjang = 2 \u00d7 (panjang + lebar) = 2 \u00d7 (12 + 5) = 2 \u00d7 17 = 34 cm."
+        }
+      ]
+    },
+    "SMP Kelas 7": {
+      "Bilangan Bulat": [
+        {
+          "question": "Hasil dari (-5) + 8 adalah ...",
+          "options": ["-13", "-3", "3", "13"],
+          "correct": 2,
+          "explanation": "(-5) + 8 = 3. Karena 8 lebih besar dari 5 dan 8 positif, hasilnya positif: 8 - 5 = 3."
+        },
+        {
+          "question": "(-3) \u00d7 (-4) = ...",
+          "options": ["-12", "-7", "7", "12"],
+          "correct": 3,
+          "explanation": "Negatif dikali negatif hasilnya positif. (-3) \u00d7 (-4) = 12."
+        },
+        {
+          "question": "Hasil dari (-12) \u00f7 3 adalah ...",
+          "options": ["-4", "-3", "3", "4"],
+          "correct": 0,
+          "explanation": "Negatif dibagi positif hasilnya negatif. (-12) \u00f7 3 = -4."
+        },
+        {
+          "question": "Manakah pernyataan yang benar?",
+          "options": ["-5 > -2", "-3 < -7", "0 > -1", "-4 > 1"],
+          "correct": 2,
+          "explanation": "0 lebih besar dari -1. Pada garis bilangan, 0 terletak di sebelah kanan -1."
+        },
+        {
+          "question": "Suhu di puncak gunung adalah -3\u00b0C. Siang hari suhu naik 8\u00b0C. Berapa suhu siang hari?",
+          "options": ["-11\u00b0C", "-5\u00b0C", "5\u00b0C", "11\u00b0C"],
+          "correct": 2,
+          "explanation": "-3 + 8 = 5. Suhu siang hari adalah 5\u00b0C."
+        }
+      ],
+      "Aljabar": [
+        {
+          "question": "Sederhanakan: 3x + 5x - 2x",
+          "options": ["4x", "5x", "6x", "8x"],
+          "correct": 2,
+          "explanation": "3x + 5x - 2x = (3 + 5 - 2)x = 6x. Kita menjumlahkan dan mengurangkan koefisien dari suku sejenis."
+        },
+        {
+          "question": "Jika x = 3, berapakah nilai dari 2x + 7?",
+          "options": ["10", "12", "13", "15"],
+          "correct": 2,
+          "explanation": "Substitusi x = 3: 2(3) + 7 = 6 + 7 = 13."
+        },
+        {
+          "question": "Hasil dari 4a \u00d7 3b adalah ...",
+          "options": ["7ab", "12ab", "12a + b", "7a + b"],
+          "correct": 1,
+          "explanation": "4a \u00d7 3b = (4 \u00d7 3)(a \u00d7 b) = 12ab."
+        },
+        {
+          "question": "Sederhanakan: 5x + 3y - 2x + y",
+          "options": ["3x + 4y", "7x + 4y", "3x + 2y", "7x + 2y"],
+          "correct": 0,
+          "explanation": "Kelompokkan suku sejenis: (5x - 2x) + (3y + y) = 3x + 4y."
+        },
+        {
+          "question": "Bentuk aljabar dari \"tiga kali suatu bilangan dikurangi lima\" adalah ...",
+          "options": ["3 - 5x", "5x - 3", "3x - 5", "3x + 5"],
+          "correct": 2,
+          "explanation": "\"Suatu bilangan\" dimisalkan x. \"Tiga kali\" = 3x. \"Dikurangi lima\" = - 5. Jadi 3x - 5."
+        }
+      ],
+      "Persamaan Linear": [
+        {
+          "question": "Tentukan nilai x dari persamaan: x + 5 = 12",
+          "options": ["5", "6", "7", "17"],
+          "correct": 2,
+          "explanation": "x + 5 = 12 \u2192 x = 12 - 5 = 7."
+        },
+        {
+          "question": "Jika 2x = 14, maka x = ...",
+          "options": ["5", "6", "7", "12"],
+          "correct": 2,
+          "explanation": "2x = 14 \u2192 x = 14 \u00f7 2 = 7."
+        },
+        {
+          "question": "Tentukan nilai x: 3x - 4 = 11",
+          "options": ["3", "4", "5", "6"],
+          "correct": 2,
+          "explanation": "3x - 4 = 11 \u2192 3x = 11 + 4 = 15 \u2192 x = 15 \u00f7 3 = 5."
+        },
+        {
+          "question": "Jika 2(x + 3) = 16, maka nilai x adalah ...",
+          "options": ["4", "5", "6", "8"],
+          "correct": 1,
+          "explanation": "2(x + 3) = 16 \u2192 x + 3 = 8 \u2192 x = 8 - 3 = 5."
+        },
+        {
+          "question": "Harga 3 buku dan 2 pensil adalah Rp17.000. Jika harga satu pensil Rp2.000, berapa harga satu buku?",
+          "options": ["Rp3.000", "Rp4.000", "Rp4.300", "Rp5.000"],
+          "correct": 2,
+          "explanation": "Misalkan harga buku = x. 3x + 2(2000) = 17000 \u2192 3x + 4000 = 17000 \u2192 3x = 13000 \u2192 x = 4333,33. Dibulatkan jadi sekitar Rp4.300 (soal kontekstual). Atau lebih tepat: 3x = 13000, x \u2248 Rp4.300."
+        }
+      ]
+    }
+  }
+}

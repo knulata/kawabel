@@ -1,0 +1,116 @@
+{
+  "subjects": [
+    {
+      "id": "matematika",
+      "name": "Matematika",
+      "icon": "calculate",
+      "file": "matematika.json",
+      "grades": {
+        "SD Kelas 1": {
+          "topics": ["Penjumlahan", "Pengurangan"]
+        },
+        "SD Kelas 4": {
+          "topics": ["Pecahan", "FPB dan KPK", "Bangun Datar"]
+        },
+        "SMP Kelas 7": {
+          "topics": ["Bilangan Bulat", "Aljabar", "Persamaan Linear"]
+        }
+      }
+    },
+    {
+      "id": "bahasa_indonesia",
+      "name": "Bahasa Indonesia",
+      "icon": "menu_book",
+      "file": "bahasa_indonesia.json",
+      "grades": {
+        "SD Kelas 4": {
+          "topics": ["Membaca", "Menulis", "Tata Bahasa"]
+        },
+        "SMP Kelas 7": {
+          "topics": ["Teks Deskripsi", "Teks Narasi", "Puisi", "Pantun"]
+        }
+      }
+    },
+    {
+      "id": "mandarin",
+      "name": "Mandarin",
+      "icon": "translate",
+      "file": "mandarin.json",
+      "has_dictation": true,
+      "grades": {
+        "SD Kelas 3": {
+          "topics": ["Kosakata Dasar", "Pola Kalimat Sederhana"],
+          "dictation_sets": ["Pelajaran 1 - Keluarga", "Pelajaran 2 - Sekolah", "Pelajaran 3 - Angka"]
+        },
+        "SD Kelas 4": {
+          "dictation_sets": ["Pelajaran 1 - Warna", "Pelajaran 2 - Makanan"]
+        },
+        "SD Kelas 5": {
+          "topics": ["Kosakata Lanjutan"],
+          "dictation_sets": ["Pelajaran 1 - Aktivitas Sehari-hari", "Pelajaran 2 - Tempat"]
+        }
+      }
+    },
+    {
+      "id": "ipa",
+      "name": "IPA (Ilmu Pengetahuan Alam)",
+      "icon": "science",
+      "file": "ipa.json",
+      "grades": {
+        "SD Kelas 4": {
+          "topics": ["Makhluk Hidup", "Energi", "Bumi dan Alam Semesta"]
+        },
+        "SMP Kelas 7": {
+          "topics": ["Klasifikasi Makhluk Hidup", "Sistem Organisasi Kehidupan", "Suhu dan Kalor"]
+        }
+      }
+    },
+    {
+      "id": "ips",
+      "name": "IPS (Ilmu Pengetahuan Sosial)",
+      "icon": "public",
+      "file": "ips.json",
+      "grades": {
+        "SD Kelas 4": {
+          "topics": ["Lingkungan Sekitar", "Peta dan Globe"]
+        },
+        "SMP Kelas 7": {
+          "topics": ["Interaksi Sosial", "Kegiatan Ekonomi"]
+        }
+      }
+    },
+    {
+      "id": "english",
+      "name": "English",
+      "icon": "language",
+      "file": "english.json",
+      "grades": {
+        "SD Kelas 3": {
+          "topics": ["Greetings", "Numbers", "Colors", "Animals"]
+        },
+        "SD Kelas 5": {
+          "topics": ["Daily Activities"]
+        },
+        "SMP Kelas 7": {
+          "topics": ["Simple Present Tense", "Past Tense", "Reading Comprehension"]
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "curriculum": "Kurikulum Merdeka / Kurikulum 2013",
+    "levels": ["SD", "SMP"],
+    "total_subjects": 6,
+    "question_format": {
+      "question": "The question text",
+      "options": "Array of 4 answer choices",
+      "correct": "Zero-based index of the correct answer",
+      "explanation": "Explanation of why the answer is correct"
+    },
+    "dictation_format": {
+      "word": "Chinese characters",
+      "pinyin": "Pronunciation guide",
+      "meaning": "Indonesian translation"
+    }
+  }
+}

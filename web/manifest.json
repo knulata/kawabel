@@ -1,13 +1,17 @@
 {
-    "name": "kawan_belajar",
-    "short_name": "kawan_belajar",
+    "name": "Kawabel — Kawan Belajar",
+    "short_name": "Kawabel",
+    "description": "Kawabel — Teman Belajar AI-mu. Belajar semua mata pelajaran dengan Kawi si burung hantu!",
     "start_url": ".",
+    "scope": "/",
+    "id": "kawabel-app",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#4CAF50",
+    "theme_color": "#4CAF50",
+    "orientation": "any",
     "prefer_related_applications": false,
+    "categories": ["education", "kids"],
+    "lang": "id",
     "icons": [
         {
             "src": "icons/Icon-192.png",
@@ -30,6 +34,29 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Foto PR",
+            "short_name": "Foto PR",
+            "description": "Foto soal, Kawi bantu jawab",
+            "url": "/?mode=homework",
+            "icons": [{ "src": "icons/Icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Dikte Mandarin",
+            "short_name": "Dikte",
+            "description": "Latihan menulis 听写",
+            "url": "/?mode=dictation",
+            "icons": [{ "src": "icons/Icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Latihan Ujian",
+            "short_name": "Ujian",
+            "description": "Persiapan ulangan & tes",
+            "url": "/?mode=testprep",
+            "icons": [{ "src": "icons/Icon-192.png", "sizes": "192x192" }]
         }
     ]
 }

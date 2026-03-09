@@ -1,0 +1,239 @@
+{
+  "subject": "Bahasa Indonesia",
+  "grades": {
+    "SD Kelas 4": {
+      "Membaca": [
+        {
+          "question": "Bacalah paragraf berikut:\n\"Kucing adalah hewan peliharaan yang populer. Kucing memiliki bulu yang lembut dan suka bermain. Kucing juga pandai menangkap tikus.\"\n\nIde pokok paragraf di atas adalah ...",
+          "options": ["Kucing pandai menangkap tikus", "Kucing adalah hewan peliharaan yang populer", "Kucing memiliki bulu lembut", "Kucing suka bermain"],
+          "correct": 1,
+          "explanation": "Ide pokok terdapat pada kalimat utama, yaitu kalimat pertama: 'Kucing adalah hewan peliharaan yang populer.' Kalimat selanjutnya menjelaskan kalimat utama."
+        },
+        {
+          "question": "Bacalah teks berikut:\n\"Setiap pagi, Siti membantu ibu menyapu halaman. Setelah itu, ia menyiram tanaman di kebun. Siti senang membantu ibu.\"\n\nApa kegiatan Siti setelah menyapu halaman?",
+          "options": ["Pergi ke sekolah", "Menyiram tanaman", "Bermain di kebun", "Memasak bersama ibu"],
+          "correct": 1,
+          "explanation": "Dalam teks disebutkan 'Setelah itu, ia menyiram tanaman di kebun.' Jadi setelah menyapu, Siti menyiram tanaman."
+        },
+        {
+          "question": "Kalimat utama pada suatu paragraf biasanya terletak di ...",
+          "options": ["Tengah paragraf saja", "Akhir paragraf saja", "Awal atau akhir paragraf", "Luar paragraf"],
+          "correct": 2,
+          "explanation": "Kalimat utama bisa terletak di awal paragraf (paragraf deduktif) atau di akhir paragraf (paragraf induktif)."
+        },
+        {
+          "question": "Bacalah teks berikut:\n\"Indonesia memiliki banyak pulau. Pulau terbesar di Indonesia adalah Kalimantan. Indonesia juga dikenal sebagai negara kepulauan terbesar di dunia.\"\n\nKesimpulan yang tepat dari teks di atas adalah ...",
+          "options": ["Kalimantan adalah negara terbesar", "Indonesia hanya terdiri dari satu pulau", "Indonesia merupakan negara kepulauan yang besar dengan banyak pulau", "Pulau di Indonesia sangat kecil"],
+          "correct": 2,
+          "explanation": "Dari teks tersebut dapat disimpulkan bahwa Indonesia merupakan negara kepulauan yang besar karena memiliki banyak pulau dan dikenal sebagai negara kepulauan terbesar di dunia."
+        },
+        {
+          "question": "Kata tanya yang digunakan untuk menanyakan tempat adalah ...",
+          "options": ["Apa", "Siapa", "Di mana", "Mengapa"],
+          "correct": 2,
+          "explanation": "'Di mana' digunakan untuk menanyakan tempat. 'Apa' untuk benda/hal, 'Siapa' untuk orang, 'Mengapa' untuk alasan."
+        }
+      ],
+      "Menulis": [
+        {
+          "question": "Penulisan huruf kapital yang benar adalah ...",
+          "options": ["saya tinggal di jakarta.", "Saya tinggal di Jakarta.", "saya Tinggal di Jakarta.", "Saya Tinggal Di Jakarta."],
+          "correct": 1,
+          "explanation": "Huruf kapital digunakan di awal kalimat ('Saya') dan untuk nama kota ('Jakarta'). Kata 'tinggal' dan 'di' tidak perlu huruf kapital."
+        },
+        {
+          "question": "Penggunaan tanda baca yang benar adalah ...",
+          "options": ["Adik membeli buku, pensil dan penghapus.", "Adik membeli buku pensil, dan penghapus.", "Adik membeli buku, pensil, dan penghapus.", "Adik membeli, buku pensil dan penghapus."],
+          "correct": 2,
+          "explanation": "Tanda koma digunakan untuk memisahkan unsur-unsur dalam suatu perincian. Sebelum kata 'dan' pada perincian terakhir juga perlu koma."
+        },
+        {
+          "question": "Kalimat yang menggunakan kata penghubung dengan benar adalah ...",
+          "options": ["Ani rajin belajar sehingga nilainya bagus.", "Ani rajin belajar tetapi nilainya bagus.", "Ani rajin belajar atau nilainya bagus.", "Ani rajin belajar karena nilainya bagus."],
+          "correct": 0,
+          "explanation": "'Sehingga' menunjukkan akibat. Ani rajin belajar (sebab) sehingga nilainya bagus (akibat). Hubungan sebab-akibat ini logis."
+        },
+        {
+          "question": "Penulisan kata depan yang benar adalah ...",
+          "options": ["Buku itu ada dimeja.", "Buku itu ada di meja.", "Buku itu ada di-meja.", "Buku itu ada Dimeja."],
+          "correct": 1,
+          "explanation": "'Di' sebagai kata depan (preposisi) yang menunjukkan tempat ditulis terpisah dari kata yang mengikutinya: 'di meja'."
+        },
+        {
+          "question": "Manakah kalimat yang menggunakan awalan 'di-' dengan benar?",
+          "options": ["Buku itu di baca Ani.", "Buku itu di-baca Ani.", "Buku itu dibaca Ani.", "Buku itu Dibaca Ani."],
+          "correct": 2,
+          "explanation": "'Di-' sebagai awalan (imbuhan) ditulis serangkai dengan kata yang mengikutinya: 'dibaca'. Berbeda dengan 'di' sebagai kata depan yang ditulis terpisah."
+        }
+      ],
+      "Tata Bahasa": [
+        {
+          "question": "Dalam kalimat 'Ani membaca buku di perpustakaan', yang menjadi subjek (S) adalah ...",
+          "options": ["membaca", "buku", "Ani", "di perpustakaan"],
+          "correct": 2,
+          "explanation": "Subjek adalah pelaku dalam kalimat. 'Ani' adalah pelaku yang melakukan kegiatan membaca."
+        },
+        {
+          "question": "Dalam kalimat 'Ibu memasak nasi goreng', yang menjadi predikat (P) adalah ...",
+          "options": ["Ibu", "memasak", "nasi goreng", "nasi"],
+          "correct": 1,
+          "explanation": "Predikat adalah kata kerja atau kegiatan dalam kalimat. 'Memasak' adalah kegiatan yang dilakukan oleh Ibu."
+        },
+        {
+          "question": "Dalam kalimat 'Ayah membeli sepeda baru di toko', yang menjadi keterangan (K) adalah ...",
+          "options": ["Ayah", "membeli", "sepeda baru", "di toko"],
+          "correct": 3,
+          "explanation": "Keterangan memberikan informasi tambahan tentang tempat, waktu, atau cara. 'Di toko' menjelaskan tempat Ayah membeli sepeda."
+        },
+        {
+          "question": "Sinonim dari kata 'pandai' adalah ...",
+          "options": ["Bodoh", "Cerdas", "Malas", "Lambat"],
+          "correct": 1,
+          "explanation": "Sinonim adalah kata yang memiliki arti sama atau mirip. 'Cerdas' memiliki arti yang sama dengan 'pandai'."
+        },
+        {
+          "question": "Antonim dari kata 'rajin' adalah ...",
+          "options": ["Pintar", "Gigih", "Tekun", "Malas"],
+          "correct": 3,
+          "explanation": "Antonim adalah kata yang berlawanan arti. 'Malas' berlawanan arti dengan 'rajin'."
+        },
+        {
+          "question": "Kalimat berikut yang termasuk kalimat tanya adalah ...",
+          "options": ["Ayo kita pergi ke sekolah!", "Kawi sedang membaca buku.", "Apakah kamu sudah makan?", "Jangan bermain di jalan!"],
+          "correct": 2,
+          "explanation": "Kalimat tanya diakhiri dengan tanda tanya (?) dan biasanya menggunakan kata tanya seperti 'apakah'."
+        }
+      ]
+    },
+    "SMP Kelas 7": {
+      "Teks Deskripsi": [
+        {
+          "question": "Teks deskripsi bertujuan untuk ...",
+          "options": ["Menceritakan kejadian masa lalu", "Menggambarkan suatu objek secara rinci", "Memberikan petunjuk melakukan sesuatu", "Menyampaikan pendapat penulis"],
+          "correct": 1,
+          "explanation": "Teks deskripsi bertujuan menggambarkan suatu objek (orang, tempat, benda) secara rinci sehingga pembaca seolah-olah dapat melihat, mendengar, atau merasakan objek tersebut."
+        },
+        {
+          "question": "Struktur teks deskripsi terdiri dari ...",
+          "options": ["Orientasi - Komplikasi - Resolusi", "Identifikasi - Deskripsi bagian - Simpulan", "Tesis - Argumen - Penegasan", "Pernyataan umum - Deretan penjelas - Penutup"],
+          "correct": 1,
+          "explanation": "Struktur teks deskripsi: (1) Identifikasi: pengenalan objek, (2) Deskripsi bagian: penggambaran rinci, (3) Simpulan: kesan penulis terhadap objek."
+        },
+        {
+          "question": "Bacalah kalimat berikut:\n\"Pantai Kuta memiliki pasir putih yang halus. Ombaknya tenang dengan air laut berwarna biru kehijauan.\"\n\nKalimat di atas menggunakan jenis deskripsi ...",
+          "options": ["Deskripsi subjektif", "Deskripsi objektif", "Deskripsi spasial", "Deskripsi temporal"],
+          "correct": 2,
+          "explanation": "Deskripsi spasial menggambarkan objek berdasarkan ruang atau tempat. Kalimat tersebut menggambarkan keadaan fisik Pantai Kuta."
+        },
+        {
+          "question": "Ciri kebahasaan teks deskripsi antara lain menggunakan ...",
+          "options": ["Kata hubung kronologis (lalu, kemudian, setelah itu)", "Kata sifat dan majas untuk menggambarkan objek", "Kata kerja imperatif (perintah)", "Konjungsi kausalitas (karena, sebab, oleh karena itu)"],
+          "correct": 1,
+          "explanation": "Teks deskripsi banyak menggunakan kata sifat (adjektiva) untuk menggambarkan objek dan majas (perumpamaan) untuk membuat gambaran lebih hidup."
+        },
+        {
+          "question": "Manakah kalimat yang termasuk kalimat deskripsi?",
+          "options": ["Kemarin kami pergi ke pantai.", "Pantai itu indah sekali dengan pasir putih lembut dan deburan ombak yang menenangkan.", "Sebaiknya kita pergi ke pantai.", "Pantai terletak di tepi laut."],
+          "correct": 1,
+          "explanation": "Kalimat deskripsi menggambarkan objek secara rinci menggunakan kata sifat dan panca indra. Pilihan B menggambarkan pantai dengan detail (pasir putih lembut, deburan ombak menenangkan)."
+        }
+      ],
+      "Teks Narasi": [
+        {
+          "question": "Teks narasi adalah teks yang ...",
+          "options": ["Menjelaskan langkah-langkah melakukan sesuatu", "Menceritakan rangkaian peristiwa atau kejadian", "Menggambarkan suatu objek secara rinci", "Berisi pendapat penulis tentang suatu masalah"],
+          "correct": 1,
+          "explanation": "Teks narasi menceritakan rangkaian peristiwa atau kejadian secara kronologis (berurutan waktu)."
+        },
+        {
+          "question": "Struktur teks narasi (cerita) terdiri dari ...",
+          "options": ["Tesis - Argumen - Penegasan", "Orientasi - Komplikasi - Resolusi", "Identifikasi - Deskripsi - Simpulan", "Pembuka - Isi - Penutup"],
+          "correct": 1,
+          "explanation": "Struktur teks narasi: Orientasi (pengenalan tokoh, latar), Komplikasi (masalah/konflik), Resolusi (penyelesaian masalah)."
+        },
+        {
+          "question": "Unsur intrinsik cerita berikut ini, kecuali ...",
+          "options": ["Tema", "Tokoh dan penokohan", "Latar belakang penulis", "Alur cerita"],
+          "correct": 2,
+          "explanation": "Latar belakang penulis termasuk unsur ekstrinsik. Unsur intrinsik meliputi tema, tokoh, penokohan, alur, latar, sudut pandang, dan amanat."
+        },
+        {
+          "question": "Alur cerita yang menceritakan peristiwa secara berurutan dari awal hingga akhir disebut alur ...",
+          "options": ["Mundur", "Maju", "Campuran", "Menyamping"],
+          "correct": 1,
+          "explanation": "Alur maju (progresif) menceritakan peristiwa secara kronologis dari awal hingga akhir. Alur mundur menceritakan dari akhir ke awal."
+        },
+        {
+          "question": "Latar dalam cerita meliputi ...",
+          "options": ["Tempat, waktu, dan suasana", "Tokoh, alur, dan tema", "Amanat dan sudut pandang", "Konflik dan penyelesaian"],
+          "correct": 0,
+          "explanation": "Latar (setting) meliputi latar tempat (di mana), latar waktu (kapan), dan latar suasana (bagaimana kondisinya)."
+        }
+      ],
+      "Puisi": [
+        {
+          "question": "Unsur-unsur puisi terbagi menjadi dua, yaitu ...",
+          "options": ["Fisik dan batin", "Luar dan dalam", "Atas dan bawah", "Depan dan belakang"],
+          "correct": 0,
+          "explanation": "Unsur puisi terbagi menjadi unsur fisik (tipografi, diksi, rima, majas, imaji) dan unsur batin (tema, nada, perasaan, amanat)."
+        },
+        {
+          "question": "Rima atau persamaan bunyi pada akhir baris puisi disebut juga ...",
+          "options": ["Majas", "Diksi", "Sajak", "Irama"],
+          "correct": 2,
+          "explanation": "Sajak atau rima adalah persamaan bunyi pada akhir baris puisi. Contoh sajak aabb: baris 1 dan 2 berima sama, baris 3 dan 4 berima sama."
+        },
+        {
+          "question": "Perhatikan bait puisi berikut:\n\"Kupu-kupu yang indah\nTerbang di taman bunga\nSayapmu bagai pelangi\nMenghias langit pagi\"\n\nMajas yang digunakan pada baris ketiga adalah ...",
+          "options": ["Personifikasi", "Hiperbola", "Simile (perumpamaan)", "Metafora"],
+          "correct": 2,
+          "explanation": "Majas simile menggunakan kata pembanding seperti 'bagai', 'seperti', 'laksana'. 'Sayapmu bagai pelangi' membandingkan sayap kupu-kupu dengan pelangi menggunakan kata 'bagai'."
+        },
+        {
+          "question": "Imaji (citraan) yang berkaitan dengan penglihatan disebut ...",
+          "options": ["Imaji auditif", "Imaji visual", "Imaji taktil", "Imaji olfaktori"],
+          "correct": 1,
+          "explanation": "Imaji visual berkaitan dengan penglihatan. Auditif = pendengaran, taktil = perabaan, olfaktori = penciuman."
+        },
+        {
+          "question": "Amanat dalam puisi adalah ...",
+          "options": ["Judul puisi", "Perasaan penyair", "Pesan atau nasihat yang ingin disampaikan penyair", "Irama dalam puisi"],
+          "correct": 2,
+          "explanation": "Amanat adalah pesan moral atau nasihat yang ingin disampaikan penyair kepada pembaca melalui puisinya."
+        }
+      ],
+      "Pantun": [
+        {
+          "question": "Pantun terdiri dari ... baris dalam setiap bait.",
+          "options": ["2 baris", "3 baris", "4 baris", "5 baris"],
+          "correct": 2,
+          "explanation": "Satu bait pantun terdiri dari 4 baris: baris 1-2 adalah sampiran, baris 3-4 adalah isi."
+        },
+        {
+          "question": "Rima (sajak) pantun adalah ...",
+          "options": ["a-a-a-a", "a-b-a-b", "a-a-b-b", "a-b-b-a"],
+          "correct": 1,
+          "explanation": "Rima pantun adalah a-b-a-b. Baris 1 berima dengan baris 3, baris 2 berima dengan baris 4."
+        },
+        {
+          "question": "Perhatikan pantun berikut:\n\"Pergi ke pasar membeli ikan\nIkan segar dari laut dalam\nRajin belajar jangan tinggalkan\nAgar cita-cita dapat diraih kemudian\"\n\nIsi pantun di atas terdapat pada baris ...",
+          "options": ["1 dan 2", "2 dan 3", "3 dan 4", "1 dan 4"],
+          "correct": 2,
+          "explanation": "Dalam pantun, baris 1-2 adalah sampiran (pengantar), sedangkan baris 3-4 adalah isi (pesan yang ingin disampaikan)."
+        },
+        {
+          "question": "Pantun yang berisi nasihat atau pelajaran hidup disebut pantun ...",
+          "options": ["Jenaka", "Teka-teki", "Nasihat", "Percintaan"],
+          "correct": 2,
+          "explanation": "Pantun nasihat berisi petuah, ajaran, atau nasihat. Pantun jenaka berisi humor, pantun teka-teki berisi tebakan."
+        },
+        {
+          "question": "Setiap baris pantun biasanya terdiri dari ...",
+          "options": ["4-6 suku kata", "6-8 suku kata", "8-12 suku kata", "12-16 suku kata"],
+          "correct": 2,
+          "explanation": "Setiap baris pantun biasanya terdiri dari 8-12 suku kata. Ini membuat pantun memiliki irama yang seimbang."
+        }
+      ]
+    }
+  }
+}
