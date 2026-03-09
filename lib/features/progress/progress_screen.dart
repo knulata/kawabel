@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/api/api_service.dart';
 import '../../core/models/student.dart';
+import '../../core/theme/kawabel_theme.dart';
+import '../../core/widgets/empty_state.dart';
+import '../../core/widgets/skeleton_loader.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
@@ -52,9 +55,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
     final subjectStats = _getSubjectStats();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F9F5),
+      backgroundColor: KColors.surface,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4CAF50),
+        backgroundColor: KColors.green,
         foregroundColor: Colors.white,
         title: const Row(
           children: [
@@ -64,7 +67,30 @@ class _ProgressScreenState extends State<ProgressScreen> {
         ),
       ),
       body: _loading
-          ? const Center(child: CircularProgressIndicator())
+          ? Padding(
+              padding: EdgeInsets.all(isWide ? 32 : 20),
+              child: Column(
+                children: [
+                  const SkeletonLoader(height: 120, borderRadius: BorderRadius.all(Radius.circular(20))),
+                  const SizedBox(height: 24),
+                  Row(
+                    children: List.generate(3, (i) => Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: i > 0 ? 12 : 0),
+                        child: const SkeletonLoader(height: 100, borderRadius: BorderRadius.all(Radius.circular(14))),
+                      ),
+                    )),
+                  ),
+                  const SizedBox(height: 28),
+                  const SkeletonLoader(height: 20, width: 180),
+                  const SizedBox(height: 16),
+                  ...List.generate(3, (_) => const Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: SkeletonLoader(height: 80, borderRadius: BorderRadius.all(Radius.circular(12))),
+                  )),
+                ],
+              ),
+            )
           : SingleChildScrollView(
               padding: EdgeInsets.all(isWide ? 32 : 20),
               child: Column(
@@ -138,14 +164,14 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         label: 'Sesi Belajar',
                         value: '${_progress.length}',
                         icon: '📚',
-                        color: const Color(0xFF2196F3),
+                        color: KColors.blue,
                       ),
                       const SizedBox(width: 12),
                       _StatCard(
                         label: 'Mata Pelajaran',
                         value: '${subjectStats.length}',
                         icon: '📖',
-                        color: const Color(0xFF9C27B0),
+                        color: KColors.purple,
                       ),
                       const SizedBox(width: 12),
                       _StatCard(
@@ -154,7 +180,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             ? '-'
                             : '${(_progress.map((p) => (p['score'] ?? 0) / (p['total'] ?? 1) * 100).reduce((a, b) => a + b) / _progress.length).round()}%',
                         icon: '📊',
-                        color: const Color(0xFFFF9800),
+                        color: KColors.orange,
                       ),
                     ],
                   ),
@@ -171,23 +197,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   const SizedBox(height: 16),
 
                   if (subjectStats.isEmpty)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(32),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        children: [
-                          const Text('📝', style: TextStyle(fontSize: 48)),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Belum ada data. Yuk mulai belajar!',
-                            style: TextStyle(color: Colors.grey[500]),
-                          ),
-                        ],
-                      ),
+                    EmptyState(
+                      emoji: '\u{1F4DD}',
+                      title: 'Belum ada data',
+                      subtitle: 'Yuk mulai belajar supaya progressmu terlihat di sini!',
+                      actionLabel: 'Mulai Belajar',
+                      onAction: () => Navigator.of(context).pop(),
                     )
                   else
                     ...subjectStats.entries.map((entry) {
@@ -230,10 +245,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: pct >= 70
-                                          ? Colors.green
+                                          ? KColors.green
                                           : pct >= 50
-                                              ? Colors.orange
-                                              : Colors.red,
+                                              ? KColors.orange
+                                              : KColors.red,
                                     ),
                                   ),
                                 ],

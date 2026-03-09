@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:animate_do/animate_do.dart';
+import '../../core/theme/kawabel_theme.dart';
+import '../../core/widgets/empty_state.dart';
+import '../../core/widgets/skeleton_loader.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -66,10 +69,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F9F5),
+      backgroundColor: KColors.surface,
       appBar: AppBar(
         title: const Text('Papan Peringkat'),
-        backgroundColor: const Color(0xFF4CAF50),
+        backgroundColor: KColors.green,
         foregroundColor: Colors.white,
         elevation: 0,
       ),
@@ -77,7 +80,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         children: [
           // Period selector
           Container(
-            color: const Color(0xFF4CAF50),
+            color: KColors.green,
             padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
             child: Row(
               children: ['week', 'month', 'all'].map((p) {
@@ -95,7 +98,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       selectedColor: Colors.white,
                       backgroundColor: Colors.white.withAlpha(50),
                       labelStyle: TextStyle(
-                        color: selected ? const Color(0xFF4CAF50) : Colors.white,
+                        color: selected ? KColors.green : Colors.white,
                         fontWeight: FontWeight.w600,
                         fontSize: 13,
                       ),
@@ -109,17 +112,15 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
           // Leaderboard list
           Expanded(
             child: _loading
-                ? const Center(child: CircularProgressIndicator())
+                ? ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: List.generate(5, (_) => const SkeletonRow()),
+                  )
                 : _leaderboard.isEmpty
-                    ? const Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('🦉', style: TextStyle(fontSize: 48)),
-                            SizedBox(height: 8),
-                            Text('Belum ada data', style: TextStyle(color: Colors.grey)),
-                          ],
-                        ),
+                    ? EmptyState(
+                        emoji: '\u{1F989}',
+                        title: 'Belum ada data',
+                        subtitle: 'Papan peringkat masih kosong. Yuk mulai belajar!',
                       )
                     : RefreshIndicator(
                         onRefresh: _fetch,
@@ -230,7 +231,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: isTop3 ? 20 : 16,
-                        color: const Color(0xFFFF9800),
+                        color: KColors.orange,
                       ),
                     ),
                     const Text(' ⭐', style: TextStyle(fontSize: 14)),

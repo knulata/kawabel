@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:google_fonts/google_fonts.dart';
+// Fonts bundled locally — no network fetch needed
 import '../../core/models/student.dart';
+import '../../core/theme/kawabel_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,6 +73,10 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   Widget _buildDots() {
+    final isTablet = Responsive.isTabletOrLarger(context);
+    final filledSize = isTablet ? 30.0 : 24.0;
+    final emptySize = isTablet ? 26.0 : 20.0;
+
     return AnimatedBuilder(
       animation: _shakeController,
       builder: (context, child) {
@@ -91,12 +97,12 @@ class _LoginScreenState extends State<LoginScreen>
           return AnimatedContainer(
             duration: const Duration(milliseconds: 150),
             margin: const EdgeInsets.symmetric(horizontal: 12),
-            width: filled ? 24 : 20,
-            height: filled ? 24 : 20,
+            width: filled ? filledSize : emptySize,
+            height: filled ? filledSize : emptySize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: _errorMessage != null
-                  ? Colors.red.shade400
+                  ? KColors.red.withAlpha(200)
                   : filled
                       ? Colors.white
                       : Colors.white.withAlpha(60),
@@ -135,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen>
               alignment: Alignment.center,
               child: Text(
                 label,
-                style: GoogleFonts.nunito(
+                style: const TextStyle(fontFamily: 'Nunito',
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
@@ -206,13 +212,13 @@ class _LoginScreenState extends State<LoginScreen>
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF81C784), Color(0xFF4CAF50), Color(0xFF388E3C)],
-          ),
+          gradient: KColors.greenGradient,
         ),
-        child: SafeArea(
+        child: Stack(
+          children: [
+            // Subtle floating circles
+            const _FloatingCircles(),
+            SafeArea(
           child: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -250,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen>
                     delay: const Duration(milliseconds: 150),
                     child: Text(
                       'kawabel',
-                      style: GoogleFonts.nunito(
+                      style: const TextStyle(fontFamily: 'Nunito',
                         fontSize: 36,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -330,6 +336,8 @@ class _LoginScreenState extends State<LoginScreen>
               ),
             ),
           ),
+          ),
+          ],
         ),
       ),
     );
@@ -340,4 +348,88 @@ class _LoginScreenState extends State<LoginScreen>
     _shakeController.dispose();
     super.dispose();
   }
+}
+
+/// Subtle floating circles for visual polish on the login screen.
+class _FloatingCircles extends StatefulWidget {
+  const _FloatingCircles();
+
+  @override
+  State<_FloatingCircles> createState() => _FloatingCirclesState();
+}
+
+class _FloatingCirclesState extends State<_FloatingCircles>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late List<_Circle> _circles;
+
+  @override
+  void initState() {
+    super.initState();
+    final rng = Random(42);
+    _circles = List.generate(8, (_) => _Circle.random(rng));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 20),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) {
+        return CustomPaint(
+          size: MediaQuery.of(context).size,
+          painter: _CirclePainter(_circles, _controller.value),
+        );
+      },
+    );
+  }
+}
+
+class _Circle {
+  final double x; // 0..1
+  final double y; // 0..1
+  final double radius;
+  final double speed;
+  final double phase;
+
+  _Circle(this.x, this.y, this.radius, this.speed, this.phase);
+
+  factory _Circle.random(Random rng) {
+    return _Circle(
+      rng.nextDouble(),
+      rng.nextDouble(),
+      20 + rng.nextDouble() * 40,
+      0.3 + rng.nextDouble() * 0.7,
+      rng.nextDouble() * 2 * pi,
+    );
+  }
+}
+
+class _CirclePainter extends CustomPainter {
+  final List<_Circle> circles;
+  final double t;
+
+  _CirclePainter(this.circles, this.t);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = Colors.white.withAlpha(18);
+    for (final c in circles) {
+      final dx = c.x * size.width + sin(t * 2 * pi * c.speed + c.phase) * 30;
+      final dy = c.y * size.height + cos(t * 2 * pi * c.speed + c.phase) * 30;
+      canvas.drawCircle(Offset(dx, dy), c.radius, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_CirclePainter old) => true;
 }

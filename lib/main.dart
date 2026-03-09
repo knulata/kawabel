@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+// Fonts bundled locally for offline PWA support (no network fetch needed)
 import 'core/ai/chat_service.dart';
 import 'core/models/student.dart';
 import 'core/services/question_cache.dart';
+import 'core/theme/kawabel_theme.dart';
 import 'features/home/home_screen.dart';
 import 'features/auth/login_screen.dart';
 
@@ -29,12 +30,12 @@ class KawabelApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF4CAF50),
-            primary: const Color(0xFF4CAF50),
-            secondary: const Color(0xFFFF9800),
-            surface: const Color(0xFFFFF8E1),
+            seedColor: KColors.green,
+            primary: KColors.green,
+            secondary: KColors.orange,
+            surface: KColors.surfaceWarm,
           ),
-          textTheme: GoogleFonts.poppinsTextTheme(),
+          fontFamily: 'Poppins',
           useMaterial3: true,
         ),
         home: const AuthGate(),
