@@ -44,6 +44,11 @@ ios/.symlinks/
 # Supabase
 supabase/.temp/
 
+# SQLite database
+*.db
+*.db-wal
+*.db-shm
+
 # Node (admin dashboard)
 node_modules/
 .next/

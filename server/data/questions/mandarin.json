@@ -1,0 +1,193 @@
+{
+  "subject": "Mandarin",
+  "grades": {
+    "SD Kelas 3": {
+      "Kosakata Dasar": [
+        {
+          "question": "\u201c\u5988\u5988\u201d\u7684\u610f\u601d\u662f\u4ec0\u4e48\uff1f (Apa arti \"\u5988\u5988\"?)",
+          "options": ["Ayah", "Ibu", "Kakak", "Adik"],
+          "correct": 1,
+          "explanation": "\u5988\u5988 (m\u0101 ma) artinya ibu."
+        },
+        {
+          "question": "Bagaimana cara menulis 'terima kasih' dalam bahasa Mandarin?",
+          "options": ["\u4f60\u597d", "\u518d\u89c1", "\u8c22\u8c22", "\u5bf9\u4e0d\u8d77"],
+          "correct": 2,
+          "explanation": "\u8c22\u8c22 (xi\u00e8 xie) artinya terima kasih. \u4f60\u597d = halo, \u518d\u89c1 = sampai jumpa, \u5bf9\u4e0d\u8d77 = maaf."
+        },
+        {
+          "question": "Pinyin yang benar untuk \u8001\u5e08 (guru) adalah ...",
+          "options": ["l\u01ceo sh\u012b", "l\u00e1o sh\u012b", "l\u01ceo s\u012b", "l\u00e1o s\u012b"],
+          "correct": 0,
+          "explanation": "\u8001\u5e08 dibaca l\u01ceo sh\u012b. \u8001 (l\u01ceo) menggunakan nada 3 (turun-naik), \u5e08 (sh\u012b) menggunakan nada 1 (datar tinggi)."
+        },
+        {
+          "question": "\u201c\u4e09\u201d\u662f\u6570\u5b57\u51e0\uff1f (Angka berapa \u4e09?)",
+          "options": ["1", "2", "3", "4"],
+          "correct": 2,
+          "explanation": "\u4e09 (s\u0101n) adalah angka 3 dalam bahasa Mandarin."
+        },
+        {
+          "question": "Apa arti \u201c\u6211\u7231\u4f60\u201d?",
+          "options": ["Saya suka makan", "Saya sayang kamu", "Saya pergi sekolah", "Saya mau tidur"],
+          "correct": 1,
+          "explanation": "\u6211\u7231\u4f60 (w\u01d2 \u00e0i n\u01d0) artinya 'Saya sayang kamu'. \u6211 = saya, \u7231 = sayang/cinta, \u4f60 = kamu."
+        }
+      ],
+      "Pola Kalimat Sederhana": [
+        {
+          "question": "Kalimat yang benar untuk mengatakan 'Saya makan nasi' adalah ...",
+          "options": ["\u6211\u7c73\u996d\u5403", "\u5403\u6211\u7c73\u996d", "\u6211\u5403\u7c73\u996d", "\u7c73\u996d\u6211\u5403"],
+          "correct": 2,
+          "explanation": "Pola kalimat Mandarin: Subjek + Kata Kerja + Objek. \u6211 (saya) + \u5403 (makan) + \u7c73\u996d (nasi) = \u6211\u5403\u7c73\u996d."
+        },
+        {
+          "question": "Bagaimana bertanya 'Kamu mau apa?' dalam bahasa Mandarin?",
+          "options": ["\u4f60\u8981\u4ec0\u4e48\uff1f", "\u4ec0\u4e48\u4f60\u8981\uff1f", "\u8981\u4f60\u4ec0\u4e48\uff1f", "\u4f60\u4ec0\u4e48\u8981\uff1f"],
+          "correct": 0,
+          "explanation": "\u4f60\u8981\u4ec0\u4e48\uff1f(n\u01d0 y\u00e0o sh\u00e9n me?) - Pola: Subjek + Kata Kerja + Kata Tanya. \u4f60 = kamu, \u8981 = mau, \u4ec0\u4e48 = apa."
+        },
+        {
+          "question": "Kalimat '\u4ed6\u662f\u6211\u7684\u670b\u53cb' artinya ...",
+          "options": ["Dia adalah guru saya", "Dia adalah teman saya", "Dia adalah kakak saya", "Dia adalah adik saya"],
+          "correct": 1,
+          "explanation": "\u4ed6 = dia (laki-laki), \u662f = adalah, \u6211\u7684 = saya punya/milik saya, \u670b\u53cb = teman. Jadi artinya 'Dia adalah teman saya'."
+        },
+        {
+          "question": "Cara mengatakan 'Saya tidak suka' dalam bahasa Mandarin adalah ...",
+          "options": ["\u6211\u559c\u6b22", "\u6211\u4e0d\u559c\u6b22", "\u6211\u6ca1\u559c\u6b22", "\u6211\u522b\u559c\u6b22"],
+          "correct": 1,
+          "explanation": "Untuk membuat kalimat negatif, tambahkan \u4e0d (b\u00f9) sebelum kata kerja. \u6211\u4e0d\u559c\u6b22 (w\u01d2 b\u00f9 x\u01d0 huan) = Saya tidak suka."
+        },
+        {
+          "question": "\u201c\u8fd9\u662f\u4ec0\u4e48\uff1f\u201d artinya ...",
+          "options": ["Itu siapa?", "Ini apa?", "Di mana ini?", "Kapan ini?"],
+          "correct": 1,
+          "explanation": "\u8fd9 (zh\u00e8) = ini, \u662f (sh\u00ec) = adalah, \u4ec0\u4e48 (sh\u00e9n me) = apa. Jadi \u8fd9\u662f\u4ec0\u4e48\uff1f= Ini apa?"
+        }
+      ]
+    },
+    "SD Kelas 5": {
+      "Kosakata Lanjutan": [
+        {
+          "question": "Hari Senin dalam bahasa Mandarin adalah ...",
+          "options": ["\u661f\u671f\u4e00", "\u661f\u671f\u4e8c", "\u661f\u671f\u4e09", "\u661f\u671f\u5929"],
+          "correct": 0,
+          "explanation": "\u661f\u671f\u4e00 (x\u012bng q\u012b y\u012b) = Senin. Sistem hari dalam Mandarin menggunakan angka: \u4e00(1)=Senin, \u4e8c(2)=Selasa, dst. \u661f\u671f\u5929/\u661f\u671f\u65e5 = Minggu."
+        },
+        {
+          "question": "\u201c\u56fe\u4e66\u9986\u201d artinya ...",
+          "options": ["Rumah sakit", "Perpustakaan", "Sekolah", "Toko buku"],
+          "correct": 1,
+          "explanation": "\u56fe\u4e66\u9986 (t\u00fa sh\u016b gu\u01cen) artinya perpustakaan. \u56fe\u4e66 = buku bergambar/buku, \u9986 = gedung/balai."
+        },
+        {
+          "question": "Kata yang tepat untuk menyebut 'buah apel' dalam bahasa Mandarin adalah ...",
+          "options": ["\u9999\u8549", "\u82f9\u679c", "\u897f\u74dc", "\u8461\u8404"],
+          "correct": 1,
+          "explanation": "\u82f9\u679c (p\u00edng gu\u01d2) = apel. \u9999\u8549 = pisang, \u897f\u74dc = semangka, \u8461\u8404 = anggur."
+        },
+        {
+          "question": "\u201c\u4eca\u5929\u5929\u6c14\u5f88\u597d\u201d artinya ...",
+          "options": ["Besok cuaca sangat bagus", "Hari ini cuaca sangat bagus", "Kemarin cuaca sangat bagus", "Hari ini sangat panas"],
+          "correct": 1,
+          "explanation": "\u4eca\u5929 = hari ini, \u5929\u6c14 = cuaca, \u5f88 = sangat, \u597d = bagus. Jadi artinya 'Hari ini cuaca sangat bagus'."
+        },
+        {
+          "question": "Bagaimana mengatakan 'Saya berumur 10 tahun' dalam bahasa Mandarin?",
+          "options": ["\u6211\u5341\u5c81\u4e86", "\u6211\u6709\u5341\u5c81", "\u6211\u662f\u5341\u5c81", "\u6211\u5341\u5e74\u4e86"],
+          "correct": 0,
+          "explanation": "\u6211\u5341\u5c81\u4e86 (w\u01d2 sh\u00ed su\u00ec le) = Saya 10 tahun. \u5341 = 10, \u5c81 = tahun (umur), \u4e86 = partikel penekanan."
+        }
+      ]
+    }
+  },
+  "dictation_sets": {
+    "SD Kelas 3": {
+      "Pelajaran 1 - Keluarga": [
+        {"word": "\u7238\u7238", "pinyin": "b\u00e0 ba", "meaning": "ayah"},
+        {"word": "\u5988\u5988", "pinyin": "m\u0101 ma", "meaning": "ibu"},
+        {"word": "\u54e5\u54e5", "pinyin": "g\u0113 ge", "meaning": "kakak laki-laki"},
+        {"word": "\u59d0\u59d0", "pinyin": "ji\u011b jie", "meaning": "kakak perempuan"},
+        {"word": "\u5f1f\u5f1f", "pinyin": "d\u00ec di", "meaning": "adik laki-laki"},
+        {"word": "\u59b9\u59b9", "pinyin": "m\u00e8i mei", "meaning": "adik perempuan"},
+        {"word": "\u7237\u7237", "pinyin": "y\u00e9 ye", "meaning": "kakek (dari ayah)"},
+        {"word": "\u5976\u5976", "pinyin": "n\u01cei nai", "meaning": "nenek (dari ayah)"},
+        {"word": "\u5bb6", "pinyin": "ji\u0101", "meaning": "rumah/keluarga"},
+        {"word": "\u7231", "pinyin": "\u00e0i", "meaning": "cinta/sayang"}
+      ],
+      "Pelajaran 2 - Sekolah": [
+        {"word": "\u5b66\u6821", "pinyin": "xu\u00e9 xi\u00e0o", "meaning": "sekolah"},
+        {"word": "\u8001\u5e08", "pinyin": "l\u01ceo sh\u012b", "meaning": "guru"},
+        {"word": "\u540c\u5b66", "pinyin": "t\u00f3ng xu\u00e9", "meaning": "teman sekelas"},
+        {"word": "\u4e66", "pinyin": "sh\u016b", "meaning": "buku"},
+        {"word": "\u7b14", "pinyin": "b\u01d0", "meaning": "pena/alat tulis"},
+        {"word": "\u8bfe", "pinyin": "k\u00e8", "meaning": "pelajaran"},
+        {"word": "\u8bfb", "pinyin": "d\u00fa", "meaning": "membaca"},
+        {"word": "\u5199", "pinyin": "xi\u011b", "meaning": "menulis"},
+        {"word": "\u5b66\u4e60", "pinyin": "xu\u00e9 x\u00ed", "meaning": "belajar"},
+        {"word": "\u6559\u5ba4", "pinyin": "ji\u00e0o sh\u00ec", "meaning": "ruang kelas"}
+      ],
+      "Pelajaran 3 - Angka": [
+        {"word": "\u4e00", "pinyin": "y\u012b", "meaning": "satu (1)"},
+        {"word": "\u4e8c", "pinyin": "\u00e8r", "meaning": "dua (2)"},
+        {"word": "\u4e09", "pinyin": "s\u0101n", "meaning": "tiga (3)"},
+        {"word": "\u56db", "pinyin": "s\u00ec", "meaning": "empat (4)"},
+        {"word": "\u4e94", "pinyin": "w\u01d4", "meaning": "lima (5)"},
+        {"word": "\u516d", "pinyin": "li\u00f9", "meaning": "enam (6)"},
+        {"word": "\u4e03", "pinyin": "q\u012b", "meaning": "tujuh (7)"},
+        {"word": "\u516b", "pinyin": "b\u0101", "meaning": "delapan (8)"},
+        {"word": "\u4e5d", "pinyin": "ji\u01d4", "meaning": "sembilan (9)"},
+        {"word": "\u5341", "pinyin": "sh\u00ed", "meaning": "sepuluh (10)"}
+      ]
+    },
+    "SD Kelas 4": {
+      "Pelajaran 1 - Warna": [
+        {"word": "\u7ea2\u8272", "pinyin": "h\u00f3ng s\u00e8", "meaning": "merah"},
+        {"word": "\u84dd\u8272", "pinyin": "l\u00e1n s\u00e8", "meaning": "biru"},
+        {"word": "\u7eff\u8272", "pinyin": "l\u01dc s\u00e8", "meaning": "hijau"},
+        {"word": "\u9ec4\u8272", "pinyin": "hu\u00e1ng s\u00e8", "meaning": "kuning"},
+        {"word": "\u767d\u8272", "pinyin": "b\u00e1i s\u00e8", "meaning": "putih"},
+        {"word": "\u9ed1\u8272", "pinyin": "h\u0113i s\u00e8", "meaning": "hitam"},
+        {"word": "\u7c89\u7ea2\u8272", "pinyin": "f\u011bn h\u00f3ng s\u00e8", "meaning": "merah muda"},
+        {"word": "\u6a58\u8272", "pinyin": "j\u00fa s\u00e8", "meaning": "oranye"}
+      ],
+      "Pelajaran 2 - Makanan": [
+        {"word": "\u7c73\u996d", "pinyin": "m\u01d0 f\u00e0n", "meaning": "nasi"},
+        {"word": "\u9762\u6761", "pinyin": "mi\u00e0n ti\u00e1o", "meaning": "mie"},
+        {"word": "\u9762\u5305", "pinyin": "mi\u00e0n b\u0101o", "meaning": "roti"},
+        {"word": "\u9e21\u86cb", "pinyin": "j\u012b d\u00e0n", "meaning": "telur ayam"},
+        {"word": "\u9e21\u8089", "pinyin": "j\u012b r\u00f2u", "meaning": "daging ayam"},
+        {"word": "\u9c7c", "pinyin": "y\u00fa", "meaning": "ikan"},
+        {"word": "\u6c34\u679c", "pinyin": "shu\u01d0 gu\u01d2", "meaning": "buah"},
+        {"word": "\u84ac\u83dc", "pinyin": "sh\u016b c\u00e0i", "meaning": "sayur"},
+        {"word": "\u6c34", "pinyin": "shu\u01d0", "meaning": "air"},
+        {"word": "\u725b\u5976", "pinyin": "ni\u00fa n\u01cei", "meaning": "susu"}
+      ]
+    },
+    "SD Kelas 5": {
+      "Pelajaran 1 - Aktivitas Sehari-hari": [
+        {"word": "\u8d77\u5e8a", "pinyin": "q\u01d0 chu\u00e1ng", "meaning": "bangun tidur"},
+        {"word": "\u5237\u7259", "pinyin": "shu\u0101 y\u00e1", "meaning": "sikat gigi"},
+        {"word": "\u6d17\u8138", "pinyin": "x\u01d0 li\u01cen", "meaning": "cuci muka"},
+        {"word": "\u5403\u65e9\u996d", "pinyin": "ch\u012b z\u01ceo f\u00e0n", "meaning": "sarapan"},
+        {"word": "\u4e0a\u5b66", "pinyin": "sh\u00e0ng xu\u00e9", "meaning": "pergi sekolah"},
+        {"word": "\u653e\u5b66", "pinyin": "f\u00e0ng xu\u00e9", "meaning": "pulang sekolah"},
+        {"word": "\u505a\u4f5c\u4e1a", "pinyin": "zu\u00f2 zu\u00f2 y\u00e8", "meaning": "mengerjakan PR"},
+        {"word": "\u7761\u89c9", "pinyin": "shu\u00ec ji\u00e0o", "meaning": "tidur"},
+        {"word": "\u73a9", "pinyin": "w\u00e1n", "meaning": "bermain"},
+        {"word": "\u8fd0\u52a8", "pinyin": "y\u00f9n d\u00f2ng", "meaning": "olahraga"}
+      ],
+      "Pelajaran 2 - Tempat": [
+        {"word": "\u5546\u5e97", "pinyin": "sh\u0101ng di\u00e0n", "meaning": "toko"},
+        {"word": "\u533b\u9662", "pinyin": "y\u012b yu\u00e0n", "meaning": "rumah sakit"},
+        {"word": "\u516c\u56ed", "pinyin": "g\u014dng yu\u00e1n", "meaning": "taman"},
+        {"word": "\u56fe\u4e66\u9986", "pinyin": "t\u00fa sh\u016b gu\u01cen", "meaning": "perpustakaan"},
+        {"word": "\u98df\u5802", "pinyin": "sh\u00ed t\u00e1ng", "meaning": "kantin"},
+        {"word": "\u64cd\u573a", "pinyin": "c\u0101o ch\u01ceng", "meaning": "lapangan"},
+        {"word": "\u5bb6", "pinyin": "ji\u0101", "meaning": "rumah"},
+        {"word": "\u8d85\u5e02", "pinyin": "ch\u0101o sh\u00ec", "meaning": "supermarket"}
+      ]
+    }
+  }
+}

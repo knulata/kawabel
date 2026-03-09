@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/ai/chat_service.dart';
+import '../../core/api/api_service.dart';
 import '../../core/models/student.dart';
 
 class DictationScreen extends StatefulWidget {
@@ -123,6 +124,16 @@ class _DictationScreenState extends State<DictationScreen> {
         } else if (_score > 0) {
           context.read<StudentProvider>().addStars(1);
         }
+        // Save progress to server
+        final student = context.read<StudentProvider>().student!;
+        ApiService.saveProgress(
+          studentId: student.id,
+          subject: 'Bahasa Mandarin',
+          topic: _lessonController.text,
+          score: _score,
+          total: _words.length,
+          type: 'dictation',
+        );
       }
     });
   }

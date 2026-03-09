@@ -2,12 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../core/models/student.dart';
+import '../../core/api/api_service.dart';
 import '../chat/chat_screen.dart';
 import '../dictation/dictation_screen.dart';
 import '../test_prep/test_prep_screen.dart';
+import '../progress/progress_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<Map<String, dynamic>> _assignments = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAssignments();
+    _registerStudent();
+  }
+
+  Future<void> _registerStudent() async {
+    final student = context.read<StudentProvider>().student!;
+    await ApiService.registerStudent(name: student.name, grade: student.grade);
+  }
+
+  Future<void> _loadAssignments() async {
+    final student = context.read<StudentProvider>().student!;
+    final assignments = await ApiService.getAssignments(grade: student.grade);
+    if (mounted) {
+      setState(() => _assignments = assignments);
+    }
+  }
 
   String _getGreeting() {
     final hour = DateTime.now().hour;
@@ -39,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${_getGreeting()}! 👋',
+                            '${_getGreeting()}!',
                             style: TextStyle(
                               fontSize: isWide ? 16 : 14,
                               color: Colors.grey[600],
@@ -60,6 +89,7 @@ class HomeScreen extends StatelessWidget {
                   FadeInRight(
                     child: Row(
                       children: [
+                        // Stars
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 14,
@@ -84,7 +114,20 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 8),
+                        // Progress button
+                        IconButton(
+                          icon: const Icon(Icons.bar_chart_rounded),
+                          color: const Color(0xFF4CAF50),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ProgressScreen(),
+                            ),
+                          ),
+                          tooltip: 'Lihat Progress',
+                        ),
+                        // Profile menu
                         PopupMenuButton(
                           icon: CircleAvatar(
                             backgroundColor: const Color(0xFF4CAF50),
@@ -98,11 +141,37 @@ class HomeScreen extends StatelessWidget {
                           ),
                           itemBuilder: (context) => [
                             PopupMenuItem(
-                              child: Text('${student.grade}'),
                               enabled: false,
+                              child: Text(
+                                '${student.grade} | Level ${student.level}',
+                              ),
                             ),
                             PopupMenuItem(
-                              child: const Text('Keluar'),
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.bar_chart, size: 18),
+                                  SizedBox(width: 8),
+                                  Text('Progressku'),
+                                ],
+                              ),
+                              onTap: () => Future.delayed(
+                                Duration.zero,
+                                () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const ProgressScreen(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.logout, size: 18),
+                                  SizedBox(width: 8),
+                                  Text('Keluar'),
+                                ],
+                              ),
                               onTap: () =>
                                   context.read<StudentProvider>().logout(),
                             ),
@@ -113,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
 
               // Budi greeting card
               FadeInUp(
@@ -151,7 +220,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'Mau belajar apa hari ini? Foto PR-mu atau pilih mata pelajaran di bawah! 📸',
+                              'Mau belajar apa hari ini? Foto PR-mu atau pilih mata pelajaran di bawah!',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.white.withAlpha(230),
@@ -164,11 +233,106 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
+
+              // Upcoming assignments
+              if (_assignments.isNotEmpty) ...[
+                FadeInUp(
+                  delay: const Duration(milliseconds: 250),
+                  child: const Text(
+                    'Tugas & Ujian Mendatang',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                FadeInUp(
+                  delay: const Duration(milliseconds: 300),
+                  child: SizedBox(
+                    height: 100,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _assignments.length,
+                      separatorBuilder: (_, __) => const SizedBox(width: 12),
+                      itemBuilder: (context, index) {
+                        final a = _assignments[index];
+                        final isTest = a['type'] == 'test';
+                        return Container(
+                          width: 220,
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: isTest
+                                ? const Color(0xFFFFF3E0)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(
+                              color: isTest
+                                  ? const Color(0xFFFF9800)
+                                  : Colors.grey[200]!,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    isTest ? '📝' : '📚',
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      a['title'] ?? '',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                '${a['subject'] ?? ''} — ${a['topic'] ?? ''}',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey[600],
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Deadline: ${a['due_date'] ?? '-'}',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isTest
+                                      ? const Color(0xFFE65100)
+                                      : Colors.grey[500],
+                                  fontWeight: isTest
+                                      ? FontWeight.w600
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+              ],
 
               // Quick actions
               FadeInUp(
-                delay: const Duration(milliseconds: 300),
+                delay: const Duration(milliseconds: 350),
                 child: const Text(
                   'Mau ngapain?',
                   style: TextStyle(

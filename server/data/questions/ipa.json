@@ -1,0 +1,207 @@
+{
+  "subject": "IPA (Ilmu Pengetahuan Alam)",
+  "grades": {
+    "SD Kelas 4": {
+      "Makhluk Hidup": [
+        {
+          "question": "Ciri-ciri makhluk hidup antara lain, kecuali ...",
+          "options": ["Bernapas", "Berkembang biak", "Bergerak", "Tidak membutuhkan makanan"],
+          "correct": 3,
+          "explanation": "Semua makhluk hidup membutuhkan makanan/nutrisi untuk bertahan hidup. Bernapas, berkembang biak, dan bergerak adalah ciri-ciri makhluk hidup."
+        },
+        {
+          "question": "Tumbuhan membuat makanan sendiri melalui proses ...",
+          "options": ["Respirasi", "Fotosintesis", "Fermentasi", "Evaporasi"],
+          "correct": 1,
+          "explanation": "Fotosintesis adalah proses tumbuhan membuat makanan sendiri menggunakan cahaya matahari, air, dan karbon dioksida untuk menghasilkan gula dan oksigen."
+        },
+        {
+          "question": "Hewan yang memakan tumbuhan disebut ...",
+          "options": ["Karnivora", "Herbivora", "Omnivora", "Insektivora"],
+          "correct": 1,
+          "explanation": "Herbivora adalah hewan pemakan tumbuhan. Contoh: sapi, kambing, kelinci. Karnivora = pemakan daging, Omnivora = pemakan segala."
+        },
+        {
+          "question": "Contoh hewan omnivora adalah ...",
+          "options": ["Harimau", "Kambing", "Ayam", "Singa"],
+          "correct": 2,
+          "explanation": "Ayam adalah omnivora karena memakan biji-bijian (tumbuhan) dan juga serangga (hewan). Harimau dan singa adalah karnivora, kambing adalah herbivora."
+        },
+        {
+          "question": "Bagian tumbuhan yang berfungsi menyerap air dan mineral dari dalam tanah adalah ...",
+          "options": ["Daun", "Batang", "Akar", "Bunga"],
+          "correct": 2,
+          "explanation": "Akar berfungsi menyerap air dan mineral dari dalam tanah, serta menopang tumbuhan agar berdiri tegak."
+        }
+      ],
+      "Energi": [
+        {
+          "question": "Sumber energi terbesar di bumi adalah ...",
+          "options": ["Angin", "Air", "Matahari", "Batu bara"],
+          "correct": 2,
+          "explanation": "Matahari adalah sumber energi terbesar di bumi. Hampir semua energi di bumi berasal dari matahari, termasuk energi pada tumbuhan, angin, dan siklus air."
+        },
+        {
+          "question": "Perubahan energi yang terjadi pada setrika listrik adalah ...",
+          "options": ["Listrik \u2192 Cahaya", "Listrik \u2192 Panas", "Listrik \u2192 Gerak", "Panas \u2192 Listrik"],
+          "correct": 1,
+          "explanation": "Setrika mengubah energi listrik menjadi energi panas yang digunakan untuk melicinkan pakaian."
+        },
+        {
+          "question": "Perubahan energi yang terjadi pada kipas angin adalah ...",
+          "options": ["Listrik \u2192 Panas", "Listrik \u2192 Gerak", "Gerak \u2192 Listrik", "Cahaya \u2192 Gerak"],
+          "correct": 1,
+          "explanation": "Kipas angin mengubah energi listrik menjadi energi gerak (kinetik) sehingga baling-baling berputar dan menghasilkan angin."
+        },
+        {
+          "question": "Energi yang tersimpan dalam makanan disebut energi ...",
+          "options": ["Kinetik", "Panas", "Kimia", "Cahaya"],
+          "correct": 2,
+          "explanation": "Makanan mengandung energi kimia yang tersimpan dalam zat-zat gizi. Saat dicerna, energi kimia ini diubah menjadi energi untuk aktivitas tubuh."
+        },
+        {
+          "question": "Contoh sumber energi yang tidak dapat diperbarui adalah ...",
+          "options": ["Tenaga surya", "Tenaga angin", "Minyak bumi", "Tenaga air"],
+          "correct": 2,
+          "explanation": "Minyak bumi adalah sumber energi yang tidak dapat diperbarui karena pembentukannya membutuhkan jutaan tahun. Surya, angin, dan air adalah energi terbarukan."
+        }
+      ],
+      "Bumi dan Alam Semesta": [
+        {
+          "question": "Planet ketiga dari Matahari adalah ...",
+          "options": ["Mars", "Venus", "Bumi", "Merkurius"],
+          "correct": 2,
+          "explanation": "Urutan planet dari Matahari: Merkurius, Venus, Bumi, Mars, Jupiter, Saturnus, Uranus, Neptunus. Bumi adalah planet ketiga."
+        },
+        {
+          "question": "Bumi berotasi (berputar pada porosnya) selama ...",
+          "options": ["12 jam", "24 jam", "30 hari", "365 hari"],
+          "correct": 1,
+          "explanation": "Bumi berotasi selama kurang lebih 24 jam (satu hari). Rotasi bumi menyebabkan pergantian siang dan malam."
+        },
+        {
+          "question": "Revolusi bumi (mengelilingi Matahari) membutuhkan waktu ...",
+          "options": ["24 jam", "30 hari", "365\u00bc hari", "28 hari"],
+          "correct": 2,
+          "explanation": "Revolusi bumi membutuhkan waktu 365\u00bc hari atau satu tahun. Revolusi bumi menyebabkan pergantian musim."
+        },
+        {
+          "question": "Lapisan bumi paling luar yang kita tinggali disebut ...",
+          "options": ["Inti bumi", "Selimut bumi", "Kerak bumi", "Magma"],
+          "correct": 2,
+          "explanation": "Kerak bumi (litosfer) adalah lapisan terluar bumi yang tipis dan keras, tempat kita tinggal. Di bawahnya ada selimut bumi dan inti bumi."
+        },
+        {
+          "question": "Satelit alami bumi adalah ...",
+          "options": ["Bintang", "Matahari", "Bulan", "Planet"],
+          "correct": 2,
+          "explanation": "Bulan adalah satelit alami bumi yang mengelilingi bumi. Bulan tidak menghasilkan cahaya sendiri, melainkan memantulkan cahaya matahari."
+        }
+      ]
+    },
+    "SMP Kelas 7": {
+      "Klasifikasi Makhluk Hidup": [
+        {
+          "question": "Ilmu yang mempelajari pengelompokan makhluk hidup disebut ...",
+          "options": ["Ekologi", "Taksonomi", "Morfologi", "Anatomi"],
+          "correct": 1,
+          "explanation": "Taksonomi adalah cabang biologi yang mempelajari pengelompokan (klasifikasi) makhluk hidup berdasarkan persamaan dan perbedaan ciri."
+        },
+        {
+          "question": "Urutan taksonomi dari tingkat tertinggi ke terendah yang benar adalah ...",
+          "options": ["Kingdom - Filum - Kelas - Ordo - Famili - Genus - Spesies", "Spesies - Genus - Famili - Ordo - Kelas - Filum - Kingdom", "Kingdom - Kelas - Filum - Famili - Ordo - Genus - Spesies", "Kingdom - Filum - Ordo - Kelas - Famili - Genus - Spesies"],
+          "correct": 0,
+          "explanation": "Urutan taksonomi dari tertinggi ke terendah: Kingdom (Kerajaan), Filum/Divisi, Kelas, Ordo, Famili, Genus, Spesies. Ingat: King Philip Came Over For Good Spaghetti."
+        },
+        {
+          "question": "Makhluk hidup yang sel-selnya tidak memiliki membran inti (prokariotik) dikelompokkan dalam kingdom ...",
+          "options": ["Animalia", "Plantae", "Fungi", "Monera"],
+          "correct": 3,
+          "explanation": "Kingdom Monera meliputi makhluk hidup prokariotik (tidak memiliki membran inti), yaitu bakteri dan alga biru (cyanobacteria)."
+        },
+        {
+          "question": "Nama ilmiah kucing rumah adalah Felis catus. 'Felis' menunjukkan tingkat ...",
+          "options": ["Spesies", "Genus", "Famili", "Ordo"],
+          "correct": 1,
+          "explanation": "Dalam tata nama binomial (dua kata), kata pertama menunjukkan genus dan kata kedua menunjukkan spesies. 'Felis' adalah nama genus kucing."
+        },
+        {
+          "question": "Ciri-ciri kingdom Fungi (jamur) antara lain ...",
+          "options": ["Berfotosintesis dan autotrof", "Tidak berfotosintesis dan heterotrof", "Prokariotik dan uniseluler", "Memiliki klorofil dan bergerak aktif"],
+          "correct": 1,
+          "explanation": "Fungi tidak memiliki klorofil sehingga tidak bisa berfotosintesis. Fungi bersifat heterotrof (memperoleh makanan dari organisme lain) dengan cara menyerap nutrisi."
+        }
+      ],
+      "Sistem Organisasi Kehidupan": [
+        {
+          "question": "Urutan organisasi kehidupan dari yang terkecil adalah ...",
+          "options": ["Sel - Jaringan - Organ - Sistem Organ - Organisme", "Jaringan - Sel - Organ - Sistem Organ - Organisme", "Sel - Organ - Jaringan - Sistem Organ - Organisme", "Organisme - Sistem Organ - Organ - Jaringan - Sel"],
+          "correct": 0,
+          "explanation": "Urutan dari terkecil: Sel (unit terkecil) \u2192 Jaringan (kumpulan sel sejenis) \u2192 Organ (kumpulan jaringan) \u2192 Sistem Organ (kumpulan organ) \u2192 Organisme."
+        },
+        {
+          "question": "Organel sel yang berfungsi sebagai pusat pengendali sel adalah ...",
+          "options": ["Mitokondria", "Ribosom", "Inti sel (nukleus)", "Retikulum endoplasma"],
+          "correct": 2,
+          "explanation": "Inti sel (nukleus) mengandung DNA yang mengatur semua aktivitas sel. Inti sel disebut pusat pengendali sel."
+        },
+        {
+          "question": "Organel sel yang berperan dalam respirasi sel (menghasilkan energi) adalah ...",
+          "options": ["Kloroplas", "Mitokondria", "Lisosom", "Badan Golgi"],
+          "correct": 1,
+          "explanation": "Mitokondria disebut 'power house of the cell' karena berperan dalam respirasi sel untuk menghasilkan energi (ATP)."
+        },
+        {
+          "question": "Perbedaan utama antara sel hewan dan sel tumbuhan adalah ...",
+          "options": ["Sel hewan memiliki inti sel, sel tumbuhan tidak", "Sel tumbuhan memiliki dinding sel dan kloroplas, sel hewan tidak", "Sel hewan lebih besar dari sel tumbuhan", "Sel tumbuhan tidak memiliki mitokondria"],
+          "correct": 1,
+          "explanation": "Sel tumbuhan memiliki dinding sel (dari selulosa) dan kloroplas (untuk fotosintesis) yang tidak dimiliki sel hewan. Keduanya sama-sama memiliki inti sel dan mitokondria."
+        },
+        {
+          "question": "Kumpulan sel-sel yang memiliki bentuk dan fungsi yang sama disebut ...",
+          "options": ["Organ", "Sistem organ", "Jaringan", "Organisme"],
+          "correct": 2,
+          "explanation": "Jaringan adalah kumpulan sel-sel yang memiliki bentuk dan fungsi yang sama. Contoh: jaringan otot terdiri dari sel-sel otot."
+        }
+      ],
+      "Suhu dan Kalor": [
+        {
+          "question": "Alat untuk mengukur suhu disebut ...",
+          "options": ["Barometer", "Higrometer", "Termometer", "Anemometer"],
+          "correct": 2,
+          "explanation": "Termometer digunakan untuk mengukur suhu. Barometer = tekanan udara, Higrometer = kelembaban udara, Anemometer = kecepatan angin."
+        },
+        {
+          "question": "Titik didih air pada skala Celsius adalah ...",
+          "options": ["0\u00b0C", "100\u00b0C", "212\u00b0C", "373\u00b0C"],
+          "correct": 1,
+          "explanation": "Air mendidih pada suhu 100\u00b0C (pada tekanan 1 atm) dalam skala Celsius. Pada skala Fahrenheit = 212\u00b0F, skala Kelvin = 373 K."
+        },
+        {
+          "question": "Perpindahan kalor melalui zat perantara tanpa disertai perpindahan partikel-partikelnya disebut ...",
+          "options": ["Konveksi", "Konduksi", "Radiasi", "Evaporasi"],
+          "correct": 1,
+          "explanation": "Konduksi adalah perpindahan kalor melalui zat padat tanpa perpindahan partikelnya. Contoh: sendok logam yang panas saat dicelupkan ke air panas."
+        },
+        {
+          "question": "Perpindahan kalor yang disertai perpindahan partikel-partikel zat disebut ...",
+          "options": ["Konduksi", "Konveksi", "Radiasi", "Sublimasi"],
+          "correct": 1,
+          "explanation": "Konveksi adalah perpindahan kalor yang disertai perpindahan partikel zat, terjadi pada zat cair dan gas. Contoh: air yang mendidih."
+        },
+        {
+          "question": "Benda yang mudah menghantarkan panas disebut ...",
+          "options": ["Isolator", "Konduktor", "Semikonduktor", "Resistor"],
+          "correct": 1,
+          "explanation": "Konduktor adalah benda yang mudah menghantarkan panas, contohnya logam (besi, tembaga, aluminium). Isolator sulit menghantarkan panas (kayu, plastik)."
+        },
+        {
+          "question": "Rumus untuk mengubah suhu dari Celsius ke Fahrenheit adalah ...",
+          "options": ["\u00b0F = \u00b0C + 273", "\u00b0F = (9/5 \u00d7 \u00b0C) + 32", "\u00b0F = 5/9 \u00d7 (\u00b0C - 32)", "\u00b0F = \u00b0C \u00d7 4/5"],
+          "correct": 1,
+          "explanation": "Rumus Celsius ke Fahrenheit: \u00b0F = (9/5 \u00d7 \u00b0C) + 32. Contoh: 100\u00b0C = (9/5 \u00d7 100) + 32 = 180 + 32 = 212\u00b0F."
+        }
+      ]
+    }
+  }
+}

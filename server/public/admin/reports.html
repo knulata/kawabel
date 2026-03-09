@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan - Kawan Belajar Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4CAF50',
+            'primary-dark': '#388E3C',
+            'primary-light': '#C8E6C9',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      aside, header, #sidebarOverlay, .no-print { display: none !important; }
+      main { margin-left: 0 !important; padding-top: 0 !important; }
+      body { background: white; }
+      .print-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform">
+    <div class="p-6 border-b">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🦉</span>
+        <div>
+          <h2 class="font-bold text-gray-800">Kawan Belajar</h2>
+          <p class="text-xs text-gray-500">Panel Admin</p>
+        </div>
+      </div>
+    </div>
+    <nav class="p-4 space-y-1">
+      <a href="/admin/" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+        Dashboard
+      </a>
+      <a href="/admin/students.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
+        Siswa
+      </a>
+      <a href="/admin/assignments.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        Tugas
+      </a>
+      <a href="/admin/reports.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Laporan
+      </a>
+    </nav>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+      <button onclick="logout()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Keluar
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="lg:hidden fixed top-0 left-0 right-0 bg-white shadow z-30 px-4 py-3 flex items-center justify-between">
+    <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2"><span class="text-xl">🦉</span><span class="font-bold text-gray-800">Laporan</span></div>
+    <div class="w-10"></div>
+  </header>
+  <div id="sidebarOverlay" class="fixed inset-0 bg-black/30 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+  <!-- Content -->
+  <main class="lg:ml-64 pt-16 lg:pt-0 min-h-screen">
+    <div class="p-6 lg:p-8">
+      <!-- Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Laporan Siswa</h1>
+          <p class="text-gray-500">Lihat progress dan kirim laporan ke orang tua</p>
+        </div>
+        <button onclick="window.print()" class="no-print inline-flex items-center gap-2 border border-gray-300 text-gray-700 font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          Cetak / PDF
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="no-print flex flex-col sm:flex-row gap-3 mb-6">
+        <select id="studentSelect" onchange="loadReport()" class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+          <option value="">Pilih siswa...</option>
+        </select>
+        <div class="flex gap-1 bg-white rounded-lg p-1 shadow-sm border border-gray-100">
+          <button onclick="setPeriod('weekly')" id="periodWeekly" class="px-4 py-2 rounded-md text-sm font-medium bg-primary text-white transition">Mingguan</button>
+          <button onclick="setPeriod('monthly')" id="periodMonthly" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition">Bulanan</button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center py-16">
+        <div class="text-5xl mb-4">🦉</div>
+        <h3 class="text-lg font-semibold text-gray-600 mb-2">Pilih Siswa</h3>
+        <p class="text-gray-400">Pilih siswa dari dropdown di atas untuk melihat laporan progress.</p>
+      </div>
+
+      <!-- Report Content (hidden until student selected) -->
+      <div id="reportContent" class="hidden space-y-6">
+
+        <!-- Student Header -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-xl" id="reportAvatar">A</div>
+              <div>
+                <h2 class="text-xl font-bold text-gray-800" id="reportName">-</h2>
+                <p class="text-gray-500" id="reportMeta">-</p>
+              </div>
+            </div>
+            <button onclick="sendReportWA()" class="no-print inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.29 0-4.408-.764-6.106-2.052l-.427-.325-2.932.983.983-2.932-.325-.427A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+              Kirim Laporan ke Orang Tua
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <p class="text-xs text-gray-500 mb-1">Rata-rata Skor</p>
+            <p class="text-2xl font-bold text-primary" id="reportAvg">-</p>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <p class="text-xs text-gray-500 mb-1">Total Sesi</p>
+            <p class="text-2xl font-bold text-blue-600" id="reportSessions">-</p>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <p class="text-xs text-gray-500 mb-1">Tugas Selesai</p>
+            <p class="text-2xl font-bold text-purple-600" id="reportCompleted">-</p>
+          </div>
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+            <p class="text-xs text-gray-500 mb-1">Bintang</p>
+            <p class="text-2xl font-bold text-yellow-500" id="reportStars">-</p>
+          </div>
+        </div>
+
+        <!-- Progress Chart -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-800 mb-4">Trend Skor</h3>
+          <canvas id="trendChart" height="200"></canvas>
+        </div>
+
+        <!-- Subject Breakdown -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-800 mb-4">Skor per Mata Pelajaran</h3>
+          <div id="subjectBars" class="space-y-4"></div>
+        </div>
+
+        <!-- Subject Radar -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-800 mb-4">Profil Kemampuan</h3>
+          <div class="max-w-md mx-auto">
+            <canvas id="radarChart" height="250"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent assignments performance -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-800 mb-4">Hasil Tugas Terbaru</h3>
+          <div id="recentResults" class="space-y-3"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    if (sessionStorage.getItem('kb_admin_auth') !== 'true') {
+      window.location.href = '/admin/';
+    }
+
+    function logout() { sessionStorage.removeItem('kb_admin_auth'); window.location.href = '/admin/'; }
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
+
+    let allStudents = [];
+    let currentPeriod = 'weekly';
+    let selectedStudent = null;
+    let trendChartInstance = null;
+    let radarChartInstance = null;
+
+    const subjects = ['Matematika', 'Bahasa Indonesia', 'Bahasa Mandarin', 'IPA', 'IPS', 'English', 'PKN'];
+    const subjectColors = {
+      'Matematika': '#4CAF50',
+      'Bahasa Indonesia': '#2196F3',
+      'Bahasa Mandarin': '#E91E63',
+      'IPA': '#FF9800',
+      'IPS': '#9C27B0',
+      'English': '#00BCD4',
+      'PKN': '#795548',
+    };
+
+    const fallbackStudents = [
+      { id: 1, name: 'Andi Pratama', grade: 4, stars: 45, parentPhone: '08123456101', parentName: 'Pak Budi', avgScore: 82 },
+      { id: 2, name: 'Sari Dewi', grade: 3, stars: 62, parentPhone: '08123456102', parentName: 'Bu Ani', avgScore: 88 },
+      { id: 3, name: 'Budi Santoso', grade: 5, stars: 38, parentPhone: '08123456103', parentName: 'Pak Joko', avgScore: 75 },
+      { id: 4, name: 'Maya Putri', grade: 4, stars: 55, parentPhone: '08123456104', parentName: 'Bu Siti', avgScore: 91 },
+      { id: 5, name: 'Riko Hermawan', grade: 6, stars: 71, parentPhone: '08123456105', parentName: 'Pak Heri', avgScore: 79 },
+      { id: 6, name: 'Dina Safitri', grade: 3, stars: 29, parentPhone: '08123456106', parentName: 'Bu Rina', avgScore: 72 },
+      { id: 7, name: 'Fajar Nugroho', grade: 5, stars: 48, parentPhone: '08123456107', parentName: 'Pak Agus', avgScore: 85 },
+      { id: 8, name: 'Lina Marlina', grade: 2, stars: 33, parentPhone: '08123456108', parentName: 'Bu Dewi', avgScore: 77 },
+      { id: 9, name: 'Omar Hakim', grade: 6, stars: 58, parentPhone: '08123456109', parentName: 'Pak Rizal', avgScore: 83 },
+      { id: 10, name: 'Putri Handayani', grade: 1, stars: 15, parentPhone: '08123456110', parentName: 'Bu Mega', avgScore: 69 },
+    ];
+
+    function normStudent(s) {
+      return {
+        id: s.id,
+        name: s.name,
+        grade: s.grade,
+        stars: s.stars || 0,
+        parentPhone: s.parentPhone || s.parent_phone,
+        parentName: s.parentName || s.parent_name,
+        avgScore: s.avgScore || s.avg_score || 0,
+      };
+    }
+
+    async function init() {
+      try {
+        const res = await fetch('/api/students');
+        if (res.ok) {
+          const raw = await res.json();
+          allStudents = raw.map(normStudent);
+        } else {
+          allStudents = fallbackStudents;
+        }
+      } catch {
+        allStudents = fallbackStudents;
+      }
+
+      const select = document.getElementById('studentSelect');
+      allStudents.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.name} (Kelas ${s.grade})`;
+        select.appendChild(opt);
+      });
+    }
+
+    function setPeriod(period) {
+      currentPeriod = period;
+      document.getElementById('periodWeekly').className = period === 'weekly'
+        ? 'px-4 py-2 rounded-md text-sm font-medium bg-primary text-white transition'
+        : 'px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition';
+      document.getElementById('periodMonthly').className = period === 'monthly'
+        ? 'px-4 py-2 rounded-md text-sm font-medium bg-primary text-white transition'
+        : 'px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 transition';
+      if (selectedStudent) loadReport();
+    }
+
+    async function loadReport() {
+      const studentId = document.getElementById('studentSelect').value;
+      if (!studentId) {
+        document.getElementById('emptyState').classList.remove('hidden');
+        document.getElementById('reportContent').classList.add('hidden');
+        return;
+      }
+
+      selectedStudent = allStudents.find(s => s.id === parseInt(studentId));
+      if (!selectedStudent) return;
+
+      document.getElementById('emptyState').classList.add('hidden');
+      document.getElementById('reportContent').classList.remove('hidden');
+
+      // Populate header
+      document.getElementById('reportAvatar').textContent = selectedStudent.name.charAt(0);
+      document.getElementById('reportName').textContent = selectedStudent.name;
+      document.getElementById('reportMeta').textContent = `Kelas ${selectedStudent.grade} | Orang tua: ${selectedStudent.parentName || '-'}`;
+
+      // Try API first
+      let reportData = null;
+      try {
+        const res = await fetch(`/api/students/${studentId}/report?period=${currentPeriod}`);
+        if (res.ok) reportData = await res.json();
+      } catch {}
+
+      if (!reportData) {
+        reportData = generateFallbackReport(selectedStudent);
+      }
+
+      renderReport(reportData);
+    }
+
+    function generateFallbackReport(student) {
+      const base = student.avgScore || 75;
+      const subjectScores = {};
+      subjects.forEach(s => {
+        subjectScores[s] = Math.max(30, Math.min(100, base + Math.floor(Math.random() * 30 - 15)));
+      });
+
+      const numPeriods = currentPeriod === 'weekly' ? 4 : 6;
+      const labels = currentPeriod === 'weekly'
+        ? ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4']
+        : ['Okt', 'Nov', 'Des', 'Jan', 'Feb', 'Mar'];
+      const trendScores = [];
+      for (let i = 0; i < numPeriods; i++) {
+        trendScores.push(Math.max(40, Math.min(100, base - (numPeriods - i) * 3 + Math.floor(Math.random() * 10))));
+      }
+
+      const recentResults = [
+        { title: 'Latihan Perkalian Bab 3', subject: 'Matematika', score: base + 5, date: '2026-03-08' },
+        { title: 'Menulis Cerita Pendek', subject: 'Bahasa Indonesia', score: base - 3, date: '2026-03-06' },
+        { title: 'English Vocabulary Quiz', subject: 'English', score: base + 8, date: '2026-03-04' },
+        { title: 'Dikte Mandarin', subject: 'Bahasa Mandarin', score: base - 7, date: '2026-03-02' },
+        { title: 'PR IPS: Peta', subject: 'IPS', score: base + 2, date: '2026-02-28' },
+      ].map(r => ({ ...r, score: Math.min(100, Math.max(0, r.score)) }));
+
+      return {
+        avgScore: base,
+        totalSessions: Math.floor(student.stars / 3) || 8,
+        completedAssignments: Math.floor(Math.random() * 10) + 5,
+        stars: student.stars,
+        subjectScores,
+        trend: { labels, scores: trendScores },
+        recentResults,
+      };
+    }
+
+    function renderReport(data) {
+      document.getElementById('reportAvg').textContent = data.avgScore + '%';
+      document.getElementById('reportSessions').textContent = data.totalSessions;
+      document.getElementById('reportCompleted').textContent = data.completedAssignments;
+      document.getElementById('reportStars').textContent = data.stars;
+
+      // Subject bars
+      const barsContainer = document.getElementById('subjectBars');
+      barsContainer.innerHTML = subjects.map(s => {
+        const score = data.subjectScores[s] || 0;
+        const color = subjectColors[s] || '#4CAF50';
+        return `
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm font-medium text-gray-700">${s}</span>
+              <span class="text-sm font-bold" style="color:${color}">${score}%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div class="h-3 rounded-full transition-all duration-500" style="width:${score}%; background-color:${color}"></div>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Trend chart
+      if (trendChartInstance) trendChartInstance.destroy();
+      const trendCtx = document.getElementById('trendChart').getContext('2d');
+      trendChartInstance = new Chart(trendCtx, {
+        type: 'line',
+        data: {
+          labels: data.trend.labels,
+          datasets: [{
+            label: 'Skor Rata-rata',
+            data: data.trend.scores,
+            borderColor: '#4CAF50',
+            backgroundColor: 'rgba(76,175,80,0.1)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 5,
+            pointBackgroundColor: '#4CAF50',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Radar chart
+      if (radarChartInstance) radarChartInstance.destroy();
+      const radarCtx = document.getElementById('radarChart').getContext('2d');
+      radarChartInstance = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: subjects.map(s => s.length > 10 ? s.substring(0, 10) + '.' : s),
+          datasets: [{
+            label: selectedStudent.name,
+            data: subjects.map(s => data.subjectScores[s] || 0),
+            backgroundColor: 'rgba(76,175,80,0.2)',
+            borderColor: '#4CAF50',
+            pointBackgroundColor: '#4CAF50',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { r: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Recent results
+      const resultsContainer = document.getElementById('recentResults');
+      if (data.recentResults && data.recentResults.length > 0) {
+        resultsContainer.innerHTML = data.recentResults.map(r => {
+          const scoreColor = r.score >= 80 ? 'text-green-600 bg-green-50' : r.score >= 60 ? 'text-yellow-600 bg-yellow-50' : 'text-red-600 bg-red-50';
+          return `
+            <div class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50">
+              <div>
+                <p class="font-medium text-gray-800 text-sm">${r.title}</p>
+                <p class="text-xs text-gray-500">${r.subject} &middot; ${formatDate(r.date)}</p>
+              </div>
+              <span class="font-bold text-sm px-3 py-1 rounded-full ${scoreColor}">${r.score}%</span>
+            </div>`;
+        }).join('');
+      } else {
+        resultsContainer.innerHTML = '<p class="text-gray-400 text-sm text-center py-4">Belum ada hasil tugas</p>';
+      }
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agt','Sep','Okt','Nov','Des'];
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    function sendReportWA() {
+      if (!selectedStudent) return;
+      const phone = (selectedStudent.parentPhone || '').replace(/^0/, '62').replace(/[^0-9]/g, '');
+      if (!phone) {
+        showToast('No. HP orang tua tidak tersedia');
+        return;
+      }
+
+      const avg = document.getElementById('reportAvg').textContent;
+      const sessions = document.getElementById('reportSessions').textContent;
+      const stars = document.getElementById('reportStars').textContent;
+
+      const message = encodeURIComponent(
+        `🦉 *Laporan Belajar - Kawan Belajar*\n\n` +
+        `Siswa: *${selectedStudent.name}*\n` +
+        `Kelas: ${selectedStudent.grade}\n` +
+        `Periode: ${currentPeriod === 'weekly' ? 'Mingguan' : 'Bulanan'}\n\n` +
+        `📊 Rata-rata Skor: *${avg}*\n` +
+        `📚 Total Sesi: ${sessions}\n` +
+        `⭐ Bintang: ${stars}\n\n` +
+        `Untuk detail lebih lanjut, hubungi guru kelas.\n` +
+        `_Dikirim dari Kawan Belajar_`
+      );
+
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+      showToast('Membuka WhatsApp...');
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2500);
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Kawan Belajar Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4CAF50',
+            'primary-dark': '#388E3C',
+            'primary-light': '#C8E6C9',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .sidebar-link.active { background-color: #4CAF50; color: white; }
+    .sidebar-link:hover:not(.active) { background-color: #C8E6C9; }
+    .stat-card { transition: transform 0.2s; }
+    .stat-card:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Login Screen -->
+  <div id="loginScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+    <div class="text-center p-8 max-w-sm w-full">
+      <div class="text-6xl mb-4">🦉</div>
+      <h1 class="text-2xl font-bold text-gray-800 mb-2">Kawan Belajar</h1>
+      <p class="text-gray-500 mb-8">Panel Admin & Guru</p>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Masukkan PIN</label>
+          <input type="password" id="pinInput" maxlength="6" placeholder="••••••"
+            class="w-full text-center text-2xl tracking-widest border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-primary focus:outline-none"
+            onkeydown="if(event.key==='Enter') attemptLogin()">
+        </div>
+        <button onclick="attemptLogin()"
+          class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 rounded-lg transition">
+          Masuk
+        </button>
+        <p id="loginError" class="text-red-500 text-sm hidden">PIN salah. Coba lagi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div id="mainApp" class="hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform">
+      <div class="p-6 border-b">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">🦉</span>
+          <div>
+            <h2 class="font-bold text-gray-800">Kawan Belajar</h2>
+            <p class="text-xs text-gray-500">Panel Admin</p>
+          </div>
+        </div>
+      </div>
+      <nav class="p-4 space-y-1">
+        <a href="/admin/" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+          Dashboard
+        </a>
+        <a href="/admin/students.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
+          Siswa
+        </a>
+        <a href="/admin/assignments.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Tugas
+        </a>
+        <a href="/admin/reports.html" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Laporan
+        </a>
+      </nav>
+      <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+        <button onclick="logout()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Keluar
+        </button>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="lg:hidden fixed top-0 left-0 right-0 bg-white shadow z-30 px-4 py-3 flex items-center justify-between">
+      <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🦉</span>
+        <span class="font-bold text-gray-800">Admin</span>
+      </div>
+      <div class="w-10"></div>
+    </header>
+
+    <!-- Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/30 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Content -->
+    <main class="lg:ml-64 pt-16 lg:pt-0 min-h-screen">
+      <div class="p-6 lg:p-8">
+        <!-- Header -->
+        <div class="mb-8">
+          <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
+          <p class="text-gray-500" id="dateDisplay"></p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197"/></svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500">Total Siswa</p>
+            <p class="text-3xl font-bold text-gray-800" id="statStudents">-</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500">Sesi Hari Ini</p>
+            <p class="text-3xl font-bold text-gray-800" id="statSessions">-</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500">Rata-rata Skor</p>
+            <p class="text-3xl font-bold text-gray-800" id="statAvgScore">-</p>
+          </div>
+          <div class="stat-card bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500">Tugas Aktif</p>
+            <p class="text-3xl font-bold text-gray-800" id="statAssignments">-</p>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-4">Aktivitas Mingguan</h3>
+            <canvas id="weeklyChart" height="200"></canvas>
+          </div>
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-4">Skor per Mata Pelajaran</h3>
+            <canvas id="subjectChart" height="200"></canvas>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
+          <h3 class="font-semibold text-gray-800 mb-4">Aksi Cepat</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <a href="/admin/assignments.html?action=create" class="flex items-center gap-3 p-4 border-2 border-dashed border-gray-200 rounded-lg hover:border-primary hover:bg-primary-light/20 transition group">
+              <div class="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:text-white transition">
+                <svg class="w-5 h-5 text-primary group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Buat Tugas Baru</p>
+                <p class="text-xs text-gray-500">Tambah PR atau ujian</p>
+              </div>
+            </a>
+            <a href="/admin/reports.html" class="flex items-center gap-3 p-4 border-2 border-dashed border-gray-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition group">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-500 transition">
+                <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2"/></svg>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Lihat Laporan</p>
+                <p class="text-xs text-gray-500">Progress siswa</p>
+              </div>
+            </a>
+            <a href="/admin/students.html?action=register" class="flex items-center gap-3 p-4 border-2 border-dashed border-gray-200 rounded-lg hover:border-purple-400 hover:bg-purple-50 transition group">
+              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-500 transition">
+                <svg class="w-5 h-5 text-purple-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Daftarkan Siswa</p>
+                <p class="text-xs text-gray-500">Siswa baru</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h3 class="font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h3>
+          <div id="recentActivity" class="space-y-3">
+            <div class="text-gray-400 text-sm text-center py-8">Memuat data...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // --- Auth ---
+    const ADMIN_PIN = '123456'; // Change this or load from env
+
+    function checkAuth() {
+      if (sessionStorage.getItem('kb_admin_auth') === 'true') {
+        showApp();
+      }
+    }
+
+    function attemptLogin() {
+      const pin = document.getElementById('pinInput').value;
+      if (pin === ADMIN_PIN) {
+        sessionStorage.setItem('kb_admin_auth', 'true');
+        showApp();
+      } else {
+        document.getElementById('loginError').classList.remove('hidden');
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    }
+
+    function showApp() {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('mainApp').classList.remove('hidden');
+      loadDashboard();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('kb_admin_auth');
+      location.reload();
+    }
+
+    // --- Sidebar ---
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    }
+
+    // --- Date ---
+    const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const now = new Date();
+    document.getElementById('dateDisplay').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+    // --- API helpers ---
+    const API_BASE = '';
+
+    async function apiFetch(path) {
+      try {
+        const res = await fetch(API_BASE + path);
+        if (!res.ok) throw new Error('API error');
+        return await res.json();
+      } catch (e) {
+        console.warn('API fetch failed for', path, '- using fallback data');
+        return null;
+      }
+    }
+
+    // --- Load Dashboard ---
+    async function loadDashboard() {
+      const stats = await apiFetch('/api/dashboard/stats');
+      if (stats) {
+        document.getElementById('statStudents').textContent = stats.total_students ?? 0;
+        document.getElementById('statSessions').textContent = stats.sessions_today ?? 0;
+        document.getElementById('statAvgScore').textContent = stats.avg_score_pct ? Math.round(stats.avg_score_pct) + '%' : '0%';
+        document.getElementById('statAssignments').textContent = stats.active_assignments ?? 0;
+      } else {
+        // Fallback demo data
+        document.getElementById('statStudents').textContent = '24';
+        document.getElementById('statSessions').textContent = '8';
+        document.getElementById('statAvgScore').textContent = '78%';
+        document.getElementById('statAssignments').textContent = '5';
+      }
+
+      loadCharts(stats);
+      loadRecentActivity();
+    }
+
+    function loadCharts(stats) {
+      // Weekly activity chart
+      const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+      const weeklyData = stats?.weeklyActivity || [12, 19, 8, 15, 22, 10, 5];
+      new Chart(weeklyCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+          datasets: [{
+            label: 'Sesi Belajar',
+            data: weeklyData,
+            backgroundColor: '#4CAF50',
+            borderRadius: 6,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 5 } } }
+        }
+      });
+
+      // Subject scores chart
+      const subjectCtx = document.getElementById('subjectChart').getContext('2d');
+      const subjectData = stats?.subjectScores || {
+        labels: ['MTK', 'B.Indo', 'Mandarin', 'IPA', 'IPS', 'English', 'PKN'],
+        scores: [75, 82, 68, 80, 77, 85, 73]
+      };
+      new Chart(subjectCtx, {
+        type: 'radar',
+        data: {
+          labels: subjectData.labels || ['MTK', 'B.Indo', 'Mandarin', 'IPA', 'IPS', 'English', 'PKN'],
+          datasets: [{
+            label: 'Rata-rata Skor',
+            data: subjectData.scores || [75, 82, 68, 80, 77, 85, 73],
+            backgroundColor: 'rgba(76, 175, 80, 0.2)',
+            borderColor: '#4CAF50',
+            pointBackgroundColor: '#4CAF50',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { r: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    async function loadRecentActivity() {
+      const activity = await apiFetch('/api/dashboard/activity');
+      const container = document.getElementById('recentActivity');
+      const items = activity || [
+        { type: 'session', student: 'Andi', subject: 'Matematika', time: '10 menit lalu' },
+        { type: 'assignment', student: 'Sari', subject: 'B. Indonesia', time: '30 menit lalu' },
+        { type: 'star', student: 'Budi', subject: 'IPA', time: '1 jam lalu' },
+        { type: 'session', student: 'Maya', subject: 'English', time: '2 jam lalu' },
+        { type: 'assignment', student: 'Riko', subject: 'Mandarin', time: '3 jam lalu' },
+      ];
+
+      const icons = {
+        session: '<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>',
+        assignment: '<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"/></svg></div>',
+        star: '<div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg></div>',
+      };
+
+      const messages = {
+        session: (i) => `<strong>${i.student}</strong> memulai sesi belajar <strong>${i.subject}</strong>`,
+        assignment: (i) => `<strong>${i.student}</strong> mengumpulkan tugas <strong>${i.subject}</strong>`,
+        star: (i) => `<strong>${i.student}</strong> mendapat bintang di <strong>${i.subject}</strong>`,
+      };
+
+      container.innerHTML = items.map(item => `
+        <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50">
+          ${icons[item.type] || icons.session}
+          <div class="flex-1">
+            <p class="text-sm text-gray-700">${(messages[item.type] || messages.session)(item)}</p>
+          </div>
+          <span class="text-xs text-gray-400 whitespace-nowrap">${item.time}</span>
+        </div>
+      `).join('');
+    }
+
+    // Init
+    checkAuth();
+  </script>
+</body>
+</html>

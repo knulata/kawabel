@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/ai/chat_service.dart';
+import '../../core/api/api_service.dart';
 import '../../core/models/student.dart';
 
 class TestPrepScreen extends StatefulWidget {
@@ -100,6 +101,16 @@ class _TestPrepScreenState extends State<TestPrepScreen> {
       } else {
         context.read<StudentProvider>().addStars(1);
       }
+      // Save progress to server
+      final student = context.read<StudentProvider>().student!;
+      ApiService.saveProgress(
+        studentId: student.id,
+        subject: _selectedSubject,
+        topic: _topicController.text,
+        score: _score,
+        total: _questions.length,
+        type: 'test',
+      );
     }
   }
 

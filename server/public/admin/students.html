@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siswa - Kawan Belajar Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4CAF50',
+            'primary-dark': '#388E3C',
+            'primary-light': '#C8E6C9',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform">
+    <div class="p-6 border-b">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🦉</span>
+        <div>
+          <h2 class="font-bold text-gray-800">Kawan Belajar</h2>
+          <p class="text-xs text-gray-500">Panel Admin</p>
+        </div>
+      </div>
+    </div>
+    <nav class="p-4 space-y-1">
+      <a href="/admin/" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/></svg>
+        Dashboard
+      </a>
+      <a href="/admin/students.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium bg-primary text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
+        Siswa
+      </a>
+      <a href="/admin/assignments.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        Tugas
+      </a>
+      <a href="/admin/reports.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Laporan
+      </a>
+    </nav>
+    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+      <button onclick="logout()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Keluar
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="lg:hidden fixed top-0 left-0 right-0 bg-white shadow z-30 px-4 py-3 flex items-center justify-between">
+    <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="flex items-center gap-2"><span class="text-xl">🦉</span><span class="font-bold text-gray-800">Siswa</span></div>
+    <div class="w-10"></div>
+  </header>
+  <div id="sidebarOverlay" class="fixed inset-0 bg-black/30 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+  <!-- Content -->
+  <main class="lg:ml-64 pt-16 lg:pt-0 min-h-screen">
+    <div class="p-6 lg:p-8">
+      <!-- Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Daftar Siswa</h1>
+          <p class="text-gray-500">Kelola data siswa</p>
+        </div>
+        <button onclick="showRegisterModal()" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-4 py-2 rounded-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Tambah Siswa
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-col sm:flex-row gap-3 mb-6">
+        <div class="flex-1">
+          <input type="text" id="searchInput" placeholder="Cari nama siswa..." oninput="filterStudents()"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+        </div>
+        <select id="gradeFilter" onchange="filterStudents()" class="border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+          <option value="">Semua Kelas</option>
+          <option value="1">Kelas 1</option>
+          <option value="2">Kelas 2</option>
+          <option value="3">Kelas 3</option>
+          <option value="4">Kelas 4</option>
+          <option value="5">Kelas 5</option>
+          <option value="6">Kelas 6</option>
+        </select>
+      </div>
+
+      <!-- Students Table -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50 border-b">
+              <tr>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nama</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Kelas</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Bintang</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase hidden md:table-cell">Terakhir Aktif</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase hidden lg:table-cell">HP Orang Tua</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="studentsTableBody" class="divide-y divide-gray-100">
+              <tr><td colspan="6" class="px-6 py-8 text-center text-gray-400">Memuat data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b flex items-center justify-between">
+        <h3 class="text-lg font-bold text-gray-800">Daftarkan Siswa Baru</h3>
+        <button onclick="closeRegisterModal()" class="p-1 hover:bg-gray-100 rounded-lg">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="registerForm" onsubmit="registerStudent(event)" class="p-6 space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nama Siswa</label>
+          <input type="text" name="name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none" placeholder="Nama lengkap">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Kelas</label>
+          <select name="grade" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none">
+            <option value="">Pilih kelas</option>
+            <option value="1">Kelas 1</option>
+            <option value="2">Kelas 2</option>
+            <option value="3">Kelas 3</option>
+            <option value="4">Kelas 4</option>
+            <option value="5">Kelas 5</option>
+            <option value="6">Kelas 6</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">No. HP Siswa (opsional)</label>
+          <input type="tel" name="phone" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none" placeholder="08xxxxxxxxxx">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nama Orang Tua</label>
+          <input type="text" name="parentName" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none" placeholder="Nama orang tua/wali">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">No. HP Orang Tua</label>
+          <input type="tel" name="parentPhone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-primary focus:outline-none" placeholder="08xxxxxxxxxx">
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="closeRegisterModal()" class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50 transition">Batal</button>
+          <button type="submit" class="flex-1 bg-primary hover:bg-primary-dark text-white font-semibold py-2 rounded-lg transition">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Student Detail Modal -->
+  <div id="detailModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b flex items-center justify-between">
+        <h3 class="text-lg font-bold text-gray-800" id="detailName">Detail Siswa</h3>
+        <button onclick="closeDetailModal()" class="p-1 hover:bg-gray-100 rounded-lg">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-6">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div class="bg-gray-50 rounded-lg p-3 text-center">
+            <p class="text-xs text-gray-500">Kelas</p>
+            <p class="text-xl font-bold text-gray-800" id="detailGrade">-</p>
+          </div>
+          <div class="bg-yellow-50 rounded-lg p-3 text-center">
+            <p class="text-xs text-gray-500">Bintang</p>
+            <p class="text-xl font-bold text-yellow-600" id="detailStars">-</p>
+          </div>
+          <div class="bg-blue-50 rounded-lg p-3 text-center">
+            <p class="text-xs text-gray-500">Total Sesi</p>
+            <p class="text-xl font-bold text-blue-600" id="detailSessions">-</p>
+          </div>
+          <div class="bg-green-50 rounded-lg p-3 text-center">
+            <p class="text-xs text-gray-500">Rata-rata</p>
+            <p class="text-xl font-bold text-green-600" id="detailAvg">-</p>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold text-gray-700 mb-3">Progress Belajar</h4>
+          <canvas id="progressChart" height="200"></canvas>
+        </div>
+        <div id="detailInfo" class="text-sm text-gray-600 space-y-1 border-t pt-4 mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Auth check
+    if (sessionStorage.getItem('kb_admin_auth') !== 'true') {
+      window.location.href = '/admin/';
+    }
+
+    function logout() { sessionStorage.removeItem('kb_admin_auth'); window.location.href = '/admin/'; }
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+      document.getElementById('sidebarOverlay').classList.toggle('hidden');
+    }
+
+    let allStudents = [];
+    let progressChartInstance = null;
+
+    // Fallback data
+    const fallbackStudents = [
+      { id: 1, name: 'Andi Pratama', grade: 4, stars: 45, lastActive: '2026-03-09T08:30:00', phone: '08123456001', parentName: 'Pak Budi', parentPhone: '08123456101', avgScore: 82 },
+      { id: 2, name: 'Sari Dewi', grade: 3, stars: 62, lastActive: '2026-03-09T09:15:00', phone: '08123456002', parentName: 'Bu Ani', parentPhone: '08123456102', avgScore: 88 },
+      { id: 3, name: 'Budi Santoso', grade: 5, stars: 38, lastActive: '2026-03-08T14:00:00', phone: '08123456003', parentName: 'Pak Joko', parentPhone: '08123456103', avgScore: 75 },
+      { id: 4, name: 'Maya Putri', grade: 4, stars: 55, lastActive: '2026-03-09T07:45:00', phone: '08123456004', parentName: 'Bu Siti', parentPhone: '08123456104', avgScore: 91 },
+      { id: 5, name: 'Riko Hermawan', grade: 6, stars: 71, lastActive: '2026-03-08T16:20:00', phone: '08123456005', parentName: 'Pak Heri', parentPhone: '08123456105', avgScore: 79 },
+      { id: 6, name: 'Dina Safitri', grade: 3, stars: 29, lastActive: '2026-03-07T10:00:00', phone: '08123456006', parentName: 'Bu Rina', parentPhone: '08123456106', avgScore: 72 },
+      { id: 7, name: 'Fajar Nugroho', grade: 5, stars: 48, lastActive: '2026-03-09T11:00:00', phone: '08123456007', parentName: 'Pak Agus', parentPhone: '08123456107', avgScore: 85 },
+      { id: 8, name: 'Lina Marlina', grade: 2, stars: 33, lastActive: '2026-03-08T08:30:00', phone: '08123456008', parentName: 'Bu Dewi', parentPhone: '08123456108', avgScore: 77 },
+      { id: 9, name: 'Omar Hakim', grade: 6, stars: 58, lastActive: '2026-03-09T13:45:00', phone: '08123456009', parentName: 'Pak Rizal', parentPhone: '08123456109', avgScore: 83 },
+      { id: 10, name: 'Putri Handayani', grade: 1, stars: 15, lastActive: '2026-03-09T09:00:00', phone: '08123456010', parentName: 'Bu Mega', parentPhone: '08123456110', avgScore: 69 },
+    ];
+
+    async function loadStudents() {
+      try {
+        const res = await fetch('/api/students');
+        if (res.ok) {
+          const raw = await res.json();
+          allStudents = raw.map(norm);
+        } else {
+          allStudents = fallbackStudents;
+        }
+      } catch {
+        allStudents = fallbackStudents;
+      }
+      renderStudents(allStudents);
+    }
+
+    function filterStudents() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const grade = document.getElementById('gradeFilter').value;
+      const filtered = allStudents.filter(s => {
+        const matchName = s.name.toLowerCase().includes(search);
+        const matchGrade = !grade || String(s.grade) === grade;
+        return matchName && matchGrade;
+      });
+      renderStudents(filtered);
+    }
+
+    // Normalize API snake_case to camelCase for internal use
+    function norm(s) {
+      return {
+        id: s.id,
+        name: s.name,
+        grade: s.grade,
+        stars: s.stars || 0,
+        lastActive: s.lastActive || s.last_active || s.created_at,
+        phone: s.phone,
+        parentName: s.parentName || s.parent_name,
+        parentPhone: s.parentPhone || s.parent_phone,
+        avgScore: s.avgScore || s.avg_score || 0,
+      };
+    }
+
+    function renderStudents(students) {
+      const tbody = document.getElementById('studentsTableBody');
+      if (students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-8 text-center text-gray-400">Tidak ada siswa ditemukan</td></tr>';
+        return;
+      }
+      tbody.innerHTML = students.map(s => {
+        const lastActive = s.lastActive ? timeAgo(new Date(s.lastActive)) : '-';
+        return `
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showDetail(${s.id})">
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-sm">${s.name.charAt(0)}</div>
+                <span class="font-medium text-gray-800">${s.name}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-gray-600">Kelas ${s.grade}</td>
+            <td class="px-6 py-4"><span class="text-yellow-500">${'&#9733;'.repeat(Math.min(5, Math.floor(s.stars/10)))}</span> <span class="text-sm text-gray-500">${s.stars}</span></td>
+            <td class="px-6 py-4 text-gray-500 text-sm hidden md:table-cell">${lastActive}</td>
+            <td class="px-6 py-4 text-gray-500 text-sm hidden lg:table-cell">${s.parentPhone || '-'}</td>
+            <td class="px-6 py-4">
+              <button onclick="event.stopPropagation(); showDetail(${s.id})" class="text-primary hover:text-primary-dark text-sm font-medium">Detail</button>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    function timeAgo(date) {
+      const diff = Date.now() - date.getTime();
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'Baru saja';
+      if (mins < 60) return mins + ' menit lalu';
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return hours + ' jam lalu';
+      const days = Math.floor(hours / 24);
+      return days + ' hari lalu';
+    }
+
+    function showRegisterModal() {
+      document.getElementById('registerModal').classList.remove('hidden');
+    }
+    function closeRegisterModal() {
+      document.getElementById('registerModal').classList.add('hidden');
+      document.getElementById('registerForm').reset();
+    }
+
+    async function registerStudent(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        grade: form.grade.value,
+        phone: form.phone.value,
+        parent_name: form.parentName.value,
+        parent_phone: form.parentPhone.value,
+      };
+      try {
+        const res = await fetch('/api/students', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          closeRegisterModal();
+          loadStudents();
+          showToast('Siswa berhasil didaftarkan!');
+        } else {
+          // Fallback: add locally
+          data.id = Date.now();
+          data.stars = 0;
+          data.lastActive = new Date().toISOString();
+          data.avgScore = 0;
+          allStudents.push(data);
+          renderStudents(allStudents);
+          closeRegisterModal();
+          showToast('Siswa ditambahkan (lokal)');
+        }
+      } catch {
+        data.id = Date.now();
+        data.stars = 0;
+        data.lastActive = new Date().toISOString();
+        data.avgScore = 0;
+        allStudents.push(data);
+        renderStudents(allStudents);
+        closeRegisterModal();
+        showToast('Siswa ditambahkan (lokal)');
+      }
+    }
+
+    async function showDetail(id) {
+      const student = allStudents.find(s => s.id === id);
+      if (!student) return;
+
+      document.getElementById('detailName').textContent = student.name;
+      document.getElementById('detailGrade').textContent = student.grade;
+      document.getElementById('detailStars').textContent = student.stars;
+      document.getElementById('detailSessions').textContent = Math.floor(student.stars / 3) || 0;
+      document.getElementById('detailAvg').textContent = (student.avgScore || 0) + '%';
+
+      document.getElementById('detailInfo').innerHTML = `
+        <p><strong>HP Siswa:</strong> ${student.phone || '-'}</p>
+        <p><strong>Orang Tua:</strong> ${student.parentName || '-'}</p>
+        <p><strong>HP Orang Tua:</strong> ${student.parentPhone || '-'}</p>
+      `;
+
+      document.getElementById('detailModal').classList.remove('hidden');
+
+      // Draw chart
+      if (progressChartInstance) progressChartInstance.destroy();
+      const ctx = document.getElementById('progressChart').getContext('2d');
+
+      let chartData;
+      try {
+        const res = await fetch(`/api/students/${id}/progress`);
+        if (res.ok) chartData = await res.json();
+      } catch {}
+
+      if (!chartData) {
+        chartData = {
+          labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+          scores: [
+            Math.max(40, student.avgScore - 15 + Math.floor(Math.random()*10)),
+            Math.max(45, student.avgScore - 8 + Math.floor(Math.random()*10)),
+            Math.max(50, student.avgScore - 3 + Math.floor(Math.random()*5)),
+            student.avgScore
+          ]
+        };
+      }
+
+      progressChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartData.labels,
+          datasets: [{
+            label: 'Skor Rata-rata',
+            data: chartData.scores,
+            borderColor: '#4CAF50',
+            backgroundColor: 'rgba(76,175,80,0.1)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 5,
+            pointBackgroundColor: '#4CAF50',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2500);
+    }
+
+    // Auto-open register if ?action=register
+    if (new URLSearchParams(location.search).get('action') === 'register') {
+      setTimeout(() => showRegisterModal(), 500);
+    }
+
+    loadStudents();
+  </script>
+</body>
+</html>

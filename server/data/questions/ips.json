@@ -1,0 +1,143 @@
+{
+  "subject": "IPS (Ilmu Pengetahuan Sosial)",
+  "grades": {
+    "SD Kelas 4": {
+      "Lingkungan Sekitar": [
+        {
+          "question": "Lingkungan alam yang terdiri dari daratan, perairan, dan udara disebut lingkungan ...",
+          "options": ["Buatan", "Sosial", "Fisik", "Budaya"],
+          "correct": 2,
+          "explanation": "Lingkungan fisik (alam) terdiri dari komponen abiotik seperti daratan, perairan, dan udara. Lingkungan sosial berkaitan dengan manusia dan interaksinya."
+        },
+        {
+          "question": "Contoh kenampakan alam buatan adalah ...",
+          "options": ["Gunung", "Sungai", "Waduk", "Danau"],
+          "correct": 2,
+          "explanation": "Waduk adalah kenampakan alam buatan karena dibuat oleh manusia untuk menampung air. Gunung, sungai, dan danau adalah kenampakan alam alami."
+        },
+        {
+          "question": "Mata pencaharian penduduk yang tinggal di daerah pantai umumnya adalah ...",
+          "options": ["Petani", "Nelayan", "Peternak", "Penambang"],
+          "correct": 1,
+          "explanation": "Penduduk di daerah pantai umumnya bermata pencaharian sebagai nelayan karena dekat dengan laut sebagai sumber ikan."
+        },
+        {
+          "question": "Sumber daya alam yang dapat diperbarui contohnya adalah ...",
+          "options": ["Minyak bumi", "Batu bara", "Hutan", "Gas alam"],
+          "correct": 2,
+          "explanation": "Hutan adalah sumber daya alam yang dapat diperbarui karena pohon dapat ditanam kembali. Minyak bumi, batu bara, dan gas alam tidak dapat diperbarui."
+        },
+        {
+          "question": "Sikap yang tepat terhadap lingkungan sekitar adalah ...",
+          "options": ["Membuang sampah di sungai", "Menebang pohon sembarangan", "Menjaga kebersihan dan menanam pohon", "Membakar sampah di halaman"],
+          "correct": 2,
+          "explanation": "Menjaga kebersihan dan menanam pohon adalah sikap peduli lingkungan. Membuang sampah di sungai, menebang pohon sembarangan, dan membakar sampah merusak lingkungan."
+        }
+      ],
+      "Peta dan Globe": [
+        {
+          "question": "Peta adalah gambar permukaan bumi yang digambar pada bidang datar dengan menggunakan ...",
+          "options": ["Ukuran sebenarnya", "Skala tertentu", "Warna tertentu", "Arah tertentu"],
+          "correct": 1,
+          "explanation": "Peta adalah gambar permukaan bumi pada bidang datar yang dibuat dengan skala tertentu. Skala menunjukkan perbandingan jarak pada peta dengan jarak sebenarnya."
+        },
+        {
+          "question": "Globe adalah model bumi yang berbentuk ...",
+          "options": ["Datar", "Kotak", "Bola", "Silinder"],
+          "correct": 2,
+          "explanation": "Globe berbentuk bola karena merupakan tiruan bentuk bumi yang sebenarnya juga berbentuk bola (bulat pepat)."
+        },
+        {
+          "question": "Pada peta, warna biru biasanya menunjukkan ...",
+          "options": ["Dataran rendah", "Dataran tinggi", "Perairan", "Hutan"],
+          "correct": 2,
+          "explanation": "Warna biru pada peta menunjukkan perairan (laut, danau, sungai). Hijau = dataran rendah, kuning/cokelat = dataran tinggi, putih = puncak bersalju."
+        },
+        {
+          "question": "Garis khayal yang membagi bumi menjadi belahan utara dan selatan disebut ...",
+          "options": ["Garis bujur", "Garis lintang", "Garis khatulistiwa", "Garis batas"],
+          "correct": 2,
+          "explanation": "Garis khatulistiwa (ekuator) adalah garis lintang 0\u00b0 yang membagi bumi menjadi belahan bumi utara dan selatan. Indonesia dilalui garis khatulistiwa."
+        },
+        {
+          "question": "Skala peta 1:100.000 artinya ...",
+          "options": ["1 cm di peta = 1 km di sebenarnya", "1 cm di peta = 10 km di sebenarnya", "1 cm di peta = 100 km di sebenarnya", "1 cm di peta = 0,1 km di sebenarnya"],
+          "correct": 0,
+          "explanation": "Skala 1:100.000 artinya 1 cm di peta mewakili 100.000 cm di sebenarnya. 100.000 cm = 1.000 m = 1 km."
+        }
+      ]
+    },
+    "SMP Kelas 7": {
+      "Interaksi Sosial": [
+        {
+          "question": "Interaksi sosial adalah hubungan timbal balik antara ...",
+          "options": ["Manusia dengan alam", "Individu dengan individu, individu dengan kelompok, atau kelompok dengan kelompok", "Hewan dengan tumbuhan", "Benda mati dengan benda hidup"],
+          "correct": 1,
+          "explanation": "Interaksi sosial adalah hubungan timbal balik yang dapat terjadi antara individu dengan individu, individu dengan kelompok, maupun kelompok dengan kelompok."
+        },
+        {
+          "question": "Syarat terjadinya interaksi sosial adalah adanya ...",
+          "options": ["Uang dan barang", "Kontak sosial dan komunikasi", "Tempat dan waktu", "Pekerjaan dan pendidikan"],
+          "correct": 1,
+          "explanation": "Interaksi sosial memerlukan dua syarat: kontak sosial (hubungan antara pihak-pihak) dan komunikasi (penyampaian pesan yang ditanggapi)."
+        },
+        {
+          "question": "Bentuk interaksi sosial yang bersifat membangun (positif) disebut ...",
+          "options": ["Disosiatif", "Asosiatif", "Destruktif", "Kompetitif"],
+          "correct": 1,
+          "explanation": "Interaksi sosial asosiatif bersifat positif dan membangun, meliputi kerja sama, akomodasi, asimilasi, dan akulturasi. Disosiatif bersifat memecah belah."
+        },
+        {
+          "question": "Kerja sama dalam masyarakat Jawa yang disebut gotong royong untuk membangun rumah disebut ...",
+          "options": ["Bargaining", "Koersi", "Sambatan", "Mediasi"],
+          "correct": 2,
+          "explanation": "Sambatan adalah istilah dalam masyarakat Jawa untuk gotong royong membantu membangun rumah atau pekerjaan besar lainnya secara bersama-sama."
+        },
+        {
+          "question": "Proses sosial di mana seseorang meniru perilaku orang lain disebut ...",
+          "options": ["Simpati", "Empati", "Imitasi", "Sugesti"],
+          "correct": 2,
+          "explanation": "Imitasi adalah proses meniru perilaku, gaya, atau tindakan orang lain. Contoh: anak kecil meniru cara bicara orang tuanya."
+        }
+      ],
+      "Kegiatan Ekonomi": [
+        {
+          "question": "Kegiatan ekonomi yang menghasilkan barang dari bahan mentah disebut kegiatan ...",
+          "options": ["Distribusi", "Konsumsi", "Produksi", "Ekspor"],
+          "correct": 2,
+          "explanation": "Produksi adalah kegiatan menghasilkan atau menambah nilai guna barang/jasa. Contoh: pabrik roti mengolah tepung menjadi roti."
+        },
+        {
+          "question": "Kegiatan menyalurkan barang dari produsen ke konsumen disebut ...",
+          "options": ["Produksi", "Distribusi", "Konsumsi", "Investasi"],
+          "correct": 1,
+          "explanation": "Distribusi adalah kegiatan menyalurkan barang dari produsen (pembuat) ke konsumen (pemakai). Contoh: pedagang grosir, toko, dan pasar."
+        },
+        {
+          "question": "Alat tukar yang sah dan berlaku di suatu negara disebut ...",
+          "options": ["Cek", "Giro", "Uang", "Voucher"],
+          "correct": 2,
+          "explanation": "Uang adalah alat tukar yang sah, diterbitkan oleh pemerintah/bank sentral, dan berlaku sebagai alat pembayaran dalam kegiatan ekonomi."
+        },
+        {
+          "question": "Pasar tradisional memiliki ciri antara lain ...",
+          "options": ["Harga sudah pasti (fixed price)", "Pembeli dan penjual bisa tawar-menawar", "Menggunakan mesin kasir", "Barang dikemas modern"],
+          "correct": 1,
+          "explanation": "Ciri khas pasar tradisional adalah terjadinya tawar-menawar harga antara pembeli dan penjual. Berbeda dengan pasar modern yang harganya sudah pasti."
+        },
+        {
+          "question": "Kebutuhan manusia yang harus dipenuhi pertama kali disebut kebutuhan ...",
+          "options": ["Tersier (mewah)", "Sekunder (tambahan)", "Primer (pokok)", "Kuarter"],
+          "correct": 2,
+          "explanation": "Kebutuhan primer adalah kebutuhan pokok yang harus dipenuhi pertama kali, meliputi sandang (pakaian), pangan (makanan), dan papan (tempat tinggal)."
+        },
+        {
+          "question": "Orang yang membeli barang untuk digunakan sendiri disebut ...",
+          "options": ["Produsen", "Distributor", "Konsumen", "Eksportir"],
+          "correct": 2,
+          "explanation": "Konsumen adalah orang yang membeli dan menggunakan barang/jasa untuk memenuhi kebutuhannya sendiri."
+        }
+      ]
+    }
+  }
+}

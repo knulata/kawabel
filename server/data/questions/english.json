@@ -1,0 +1,267 @@
+{
+  "subject": "English",
+  "grades": {
+    "SD Kelas 3": {
+      "Greetings": [
+        {
+          "question": "What do you say when you meet someone in the morning?",
+          "options": ["Good night", "Good morning", "Good evening", "Goodbye"],
+          "correct": 1,
+          "explanation": "'Good morning' is used as a greeting when you meet someone in the morning (before noon)."
+        },
+        {
+          "question": "How do you respond to 'How are you?'",
+          "options": ["I am ten years old", "My name is Ani", "I am fine, thank you", "I go to school"],
+          "correct": 2,
+          "explanation": "The common response to 'How are you?' is 'I am fine, thank you' or 'I'm fine, thanks.'"
+        },
+        {
+          "question": "What do you say when someone gives you a gift?",
+          "options": ["I'm sorry", "Thank you", "Goodbye", "Good morning"],
+          "correct": 1,
+          "explanation": "We say 'Thank you' to show gratitude when someone gives us something or does something nice for us."
+        },
+        {
+          "question": "Complete the dialogue: 'Hello, my name is Budi. What is ___ name?'",
+          "options": ["my", "his", "your", "her"],
+          "correct": 2,
+          "explanation": "'Your' is used because the speaker is asking the other person's name. 'What is your name?' means 'Siapa namamu?'"
+        },
+        {
+          "question": "What do you say when you leave school?",
+          "options": ["Good morning", "Hello", "Goodbye", "Good night"],
+          "correct": 2,
+          "explanation": "'Goodbye' is used when you are leaving or parting from someone. 'Good night' is specifically used at night before sleeping."
+        }
+      ],
+      "Numbers": [
+        {
+          "question": "What is the English word for the number 7?",
+          "options": ["Six", "Seven", "Eight", "Nine"],
+          "correct": 1,
+          "explanation": "The number 7 in English is 'seven'. Six = 6, Eight = 8, Nine = 9."
+        },
+        {
+          "question": "How do you write '12' in English?",
+          "options": ["Eleven", "Twelve", "Twenty", "Ten"],
+          "correct": 1,
+          "explanation": "12 in English is 'twelve'. Eleven = 11, Twenty = 20, Ten = 10."
+        },
+        {
+          "question": "I have ___ fingers on both hands.",
+          "options": ["eight", "nine", "ten", "eleven"],
+          "correct": 2,
+          "explanation": "We have ten (10) fingers on both hands - five fingers on each hand."
+        },
+        {
+          "question": "What number comes after fifteen?",
+          "options": ["Fourteen", "Sixteen", "Thirteen", "Seventeen"],
+          "correct": 1,
+          "explanation": "After fifteen (15) comes sixteen (16). The sequence is: ...fourteen (14), fifteen (15), sixteen (16), seventeen (17)..."
+        },
+        {
+          "question": "Five plus three equals ...",
+          "options": ["seven", "eight", "nine", "six"],
+          "correct": 1,
+          "explanation": "5 + 3 = 8. In English, eight is the word for the number 8."
+        }
+      ],
+      "Colors": [
+        {
+          "question": "The sky is usually ___.",
+          "options": ["red", "green", "blue", "yellow"],
+          "correct": 2,
+          "explanation": "The sky is usually blue during a clear day."
+        },
+        {
+          "question": "Bananas are ___.",
+          "options": ["red", "blue", "green", "yellow"],
+          "correct": 3,
+          "explanation": "Ripe bananas are yellow. 'Yellow' is the color kuning in Bahasa Indonesia."
+        },
+        {
+          "question": "What color do you get when you mix red and white?",
+          "options": ["Purple", "Pink", "Orange", "Brown"],
+          "correct": 1,
+          "explanation": "Mixing red and white creates pink (merah muda)."
+        },
+        {
+          "question": "Leaves are usually ___.",
+          "options": ["blue", "red", "green", "white"],
+          "correct": 2,
+          "explanation": "Leaves are usually green because they contain chlorophyll for photosynthesis."
+        },
+        {
+          "question": "What color is a zebra?",
+          "options": ["Brown and white", "Black and white", "Black and yellow", "Red and white"],
+          "correct": 1,
+          "explanation": "A zebra has black and white stripes."
+        }
+      ],
+      "Animals": [
+        {
+          "question": "A ___ says 'meow'.",
+          "options": ["dog", "cat", "bird", "fish"],
+          "correct": 1,
+          "explanation": "A cat says 'meow'. Dog = anjing, Bird = burung, Fish = ikan."
+        },
+        {
+          "question": "Which animal lives in water?",
+          "options": ["Lion", "Eagle", "Fish", "Rabbit"],
+          "correct": 2,
+          "explanation": "Fish live in water (air). Lion = singa, Eagle = elang, Rabbit = kelinci - they all live on land."
+        },
+        {
+          "question": "A ___ has a long trunk.",
+          "options": ["giraffe", "elephant", "tiger", "monkey"],
+          "correct": 1,
+          "explanation": "An elephant has a long trunk (belalai). A giraffe has a long neck."
+        },
+        {
+          "question": "Which animal can fly?",
+          "options": ["Cat", "Dog", "Bird", "Cow"],
+          "correct": 2,
+          "explanation": "A bird (burung) can fly using its wings. Cats, dogs, and cows cannot fly."
+        },
+        {
+          "question": "A baby cat is called a ___.",
+          "options": ["puppy", "kitten", "cub", "chick"],
+          "correct": 1,
+          "explanation": "A baby cat is called a kitten. A puppy is a baby dog, a cub is a baby bear/lion, and a chick is a baby chicken."
+        }
+      ]
+    },
+    "SD Kelas 5": {
+      "Daily Activities": [
+        {
+          "question": "I ___ my teeth every morning.",
+          "options": ["wash", "brush", "clean", "comb"],
+          "correct": 1,
+          "explanation": "We 'brush' our teeth. The phrase is 'brush my teeth' (menggosok gigi). We use a toothbrush and toothpaste."
+        },
+        {
+          "question": "Rina ___ to school at 7 o'clock every day.",
+          "options": ["go", "goes", "going", "went"],
+          "correct": 1,
+          "explanation": "We use 'goes' because the subject is 'Rina' (third person singular - she). In Simple Present tense, we add -s or -es to the verb for he/she/it."
+        },
+        {
+          "question": "What time do you usually have breakfast?",
+          "options": ["At midnight", "In the morning", "In the evening", "At night"],
+          "correct": 1,
+          "explanation": "Breakfast (sarapan) is usually eaten in the morning before starting daily activities."
+        },
+        {
+          "question": "After school, I ___ my homework.",
+          "options": ["make", "do", "play", "write"],
+          "correct": 1,
+          "explanation": "The correct phrase is 'do homework' (mengerjakan PR). We 'do' homework, not 'make' homework."
+        },
+        {
+          "question": "I ___ a bath before going to school.",
+          "options": ["make", "do", "take", "get"],
+          "correct": 2,
+          "explanation": "The correct phrase is 'take a bath' (mandi). This is a common English expression for bathing."
+        }
+      ]
+    },
+    "SMP Kelas 7": {
+      "Simple Present Tense": [
+        {
+          "question": "Choose the correct sentence:",
+          "options": ["She go to school every day.", "She goes to school every day.", "She going to school every day.", "She goed to school every day."],
+          "correct": 1,
+          "explanation": "In Simple Present tense, we add -s or -es to the verb for third person singular subjects (he, she, it). 'She goes' is correct."
+        },
+        {
+          "question": "My father ___ coffee every morning.",
+          "options": ["drink", "drinks", "drinking", "drank"],
+          "correct": 1,
+          "explanation": "The subject 'My father' is third person singular (he), so the verb needs -s: 'drinks'."
+        },
+        {
+          "question": "They ___ not like spicy food.",
+          "options": ["does", "do", "is", "are"],
+          "correct": 1,
+          "explanation": "For plural subjects (they, we) and I/you, we use 'do not' (don't) to make negative sentences in Simple Present. 'They do not like spicy food.'"
+        },
+        {
+          "question": "___ your mother work at a hospital?",
+          "options": ["Do", "Does", "Is", "Are"],
+          "correct": 1,
+          "explanation": "For questions with third person singular subjects (your mother = she), we use 'Does'. 'Does your mother work at a hospital?'"
+        },
+        {
+          "question": "Which sentence is correct?",
+          "options": ["Water boil at 100 degrees Celsius.", "Water boils at 100 degrees Celsius.", "Water is boil at 100 degrees Celsius.", "Water boiling at 100 degrees Celsius."],
+          "correct": 1,
+          "explanation": "Simple Present is used for general facts and truths. 'Water' is third person singular (it), so we add -s: 'boils'."
+        }
+      ],
+      "Past Tense": [
+        {
+          "question": "I ___ to the library yesterday.",
+          "options": ["go", "goes", "went", "going"],
+          "correct": 2,
+          "explanation": "'Went' is the past tense of 'go'. 'Yesterday' indicates the action happened in the past."
+        },
+        {
+          "question": "She ___ a delicious cake last week.",
+          "options": ["make", "makes", "making", "made"],
+          "correct": 3,
+          "explanation": "'Made' is the past tense of 'make'. 'Last week' tells us this happened in the past."
+        },
+        {
+          "question": "We ___ not see the movie last night.",
+          "options": ["do", "does", "did", "are"],
+          "correct": 2,
+          "explanation": "In negative sentences of Simple Past tense, we use 'did not' (didn't) for all subjects. 'We did not see the movie last night.'"
+        },
+        {
+          "question": "___ you finish your homework yesterday?",
+          "options": ["Do", "Does", "Did", "Are"],
+          "correct": 2,
+          "explanation": "For questions in Simple Past tense, we use 'Did' for all subjects. 'Did you finish your homework yesterday?'"
+        },
+        {
+          "question": "The students ___ hard for the exam last month.",
+          "options": ["study", "studies", "studying", "studied"],
+          "correct": 3,
+          "explanation": "'Studied' is the past tense of 'study'. For regular verbs ending in consonant + y, change y to i and add -ed."
+        }
+      ],
+      "Reading Comprehension": [
+        {
+          "question": "Read the text:\n\"My name is Andi. I am a student at SMP Negeri 1. I wake up at 5 o'clock every morning. I take a bath, have breakfast, and go to school by bicycle. School starts at 7 o'clock.\"\n\nWhat time does Andi wake up?",
+          "options": ["At 6 o'clock", "At 5 o'clock", "At 7 o'clock", "At 4 o'clock"],
+          "correct": 1,
+          "explanation": "The text states 'I wake up at 5 o'clock every morning.'"
+        },
+        {
+          "question": "Based on the text above, how does Andi go to school?",
+          "options": ["By car", "By bus", "By bicycle", "On foot"],
+          "correct": 2,
+          "explanation": "The text says 'go to school by bicycle' which means Andi rides a bicycle to school."
+        },
+        {
+          "question": "Read the text:\n\"Jakarta is the capital city of Indonesia. It is located on the island of Java. Jakarta is a very big and crowded city. Many people work in Jakarta. The city has many tall buildings, shopping malls, and museums.\"\n\nWhere is Jakarta located?",
+          "options": ["On the island of Sumatra", "On the island of Kalimantan", "On the island of Java", "On the island of Sulawesi"],
+          "correct": 2,
+          "explanation": "The text clearly states 'It is located on the island of Java.'"
+        },
+        {
+          "question": "Based on the text above, which of the following is NOT mentioned about Jakarta?",
+          "options": ["Tall buildings", "Shopping malls", "Beaches", "Museums"],
+          "correct": 2,
+          "explanation": "The text mentions tall buildings, shopping malls, and museums. Beaches are not mentioned in the text."
+        },
+        {
+          "question": "Read the text:\n\"Siti loves reading books. She goes to the library every Saturday. Her favorite books are about animals. She wants to be a veterinarian when she grows up.\"\n\nWhat does Siti want to be?",
+          "options": ["A teacher", "A doctor", "A veterinarian", "A librarian"],
+          "correct": 2,
+          "explanation": "The text says 'She wants to be a veterinarian when she grows up.' A veterinarian is a doctor for animals (dokter hewan)."
+        }
+      ]
+    }
+  }
+}
