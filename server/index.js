@@ -11,6 +11,7 @@ const cors = require('cors');
 const Database = require('better-sqlite3');
 const cron = require('node-cron');
 const path = require('path');
+const { filterInput, filterOutput } = require('./middleware/safety');
 
 const app = express();
 app.use(cors());
@@ -64,6 +65,7 @@ function initDatabase() {
       center_id INTEGER REFERENCES centers(id),
       stars INTEGER DEFAULT 0,
       level INTEGER DEFAULT 1,
+      pin TEXT UNIQUE,
       created_at TEXT DEFAULT (datetime('now'))
     );
 
@@ -74,6 +76,7 @@ function initDatabase() {
       topic TEXT,
       started_at TEXT DEFAULT (datetime('now')),
       ended_at TEXT,
+      last_activity TEXT DEFAULT (datetime('now')),
       messages_count INTEGER DEFAULT 0
     );
 
@@ -111,12 +114,69 @@ function initDatabase() {
       sent_at TEXT,
       status TEXT DEFAULT 'pending'
     );
+
+    CREATE TABLE IF NOT EXISTS usage (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id TEXT NOT NULL,
+      date TEXT NOT NULL,
+      request_count INTEGER DEFAULT 0,
+      image_count INTEGER DEFAULT 0,
+      UNIQUE(student_id, date)
+    );
   `);
 
   console.log('Database initialized at', DB_PATH);
 }
 
 initDatabase();
+
+// ---------------------------------------------------------------------------
+// PIN helpers & migration for existing students
+// ---------------------------------------------------------------------------
+function generateUniquePin() {
+  const existing = new Set(
+    db.prepare("SELECT pin FROM students WHERE pin IS NOT NULL").all().map(r => r.pin)
+  );
+  let pin;
+  let attempts = 0;
+  do {
+    pin = String(Math.floor(1000 + Math.random() * 9000)); // 1000-9999
+    attempts++;
+    if (attempts > 5000) throw new Error('Cannot generate unique PIN — table may be full');
+  } while (existing.has(pin));
+  return pin;
+}
+
+// Add pin column if it doesn't exist (for existing databases)
+try {
+  db.prepare("SELECT pin FROM students LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE students ADD COLUMN pin TEXT UNIQUE");
+  console.log('Added pin column to students table');
+}
+
+// Add last_activity column to sessions if missing
+try {
+  db.prepare("SELECT last_activity FROM sessions LIMIT 1").get();
+} catch {
+  db.exec("ALTER TABLE sessions ADD COLUMN last_activity TEXT DEFAULT (datetime('now'))");
+  console.log('Added last_activity column to sessions table');
+}
+
+// Auto-generate PINs for existing students that don't have one
+{
+  const withoutPin = db.prepare("SELECT id FROM students WHERE pin IS NULL").all();
+  if (withoutPin.length > 0) {
+    const updateStmt = db.prepare("UPDATE students SET pin = ? WHERE id = ?");
+    const assign = db.transaction(() => {
+      for (const row of withoutPin) {
+        updateStmt.run(generateUniquePin(), row.id);
+      }
+    });
+    assign();
+    console.log(`Auto-generated PINs for ${withoutPin.length} existing student(s)`);
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Rate limiting per student (simple in-memory)
@@ -302,13 +362,91 @@ cron.schedule('0 3 * * 0', async () => {
 }, { timezone: 'Asia/Jakarta' });
 
 // ---------------------------------------------------------------------------
-// API: Chat (existing)
+// Daily usage limits (persistent, per student)
+// ---------------------------------------------------------------------------
+const DAILY_TEXT_LIMIT = 30;
+const DAILY_IMAGE_LIMIT = 10;
+
+function getTodayStr() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
+function getOrCreateUsage(studentId) {
+  const today = getTodayStr();
+  const key = String(studentId || 'anonymous');
+
+  let row = db.prepare('SELECT * FROM usage WHERE student_id = ? AND date = ?').get(key, today);
+  if (!row) {
+    db.prepare('INSERT INTO usage (student_id, date, request_count, image_count) VALUES (?, ?, 0, 0)').run(key, today);
+    row = db.prepare('SELECT * FROM usage WHERE student_id = ? AND date = ?').get(key, today);
+  }
+  return row;
+}
+
+function incrementUsage(studentId, hasImage) {
+  const today = getTodayStr();
+  const key = String(studentId || 'anonymous');
+
+  if (hasImage) {
+    db.prepare('UPDATE usage SET request_count = request_count + 1, image_count = image_count + 1 WHERE student_id = ? AND date = ?').run(key, today);
+  } else {
+    db.prepare('UPDATE usage SET request_count = request_count + 1 WHERE student_id = ? AND date = ?').run(key, today);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// API: Chat
 // ---------------------------------------------------------------------------
 app.post('/api/chat', async (req, res) => {
   const { messages, student_id, max_tokens = 1500, temperature = 0.7 } = req.body;
 
   if (!checkRateLimit(student_id)) {
     return res.status(429).json({ error: 'Terlalu banyak permintaan. Tunggu sebentar ya!' });
+  }
+
+  // --- Content safety: filter student input ---
+  const lastUserMsg = messages && messages.slice().reverse().find(m => m.role === 'user');
+  if (lastUserMsg) {
+    const textContent = typeof lastUserMsg.content === 'string'
+      ? lastUserMsg.content
+      : Array.isArray(lastUserMsg.content)
+        ? lastUserMsg.content.filter(c => c.type === 'text').map(c => c.text).join(' ')
+        : '';
+
+    const inputCheck = filterInput(textContent);
+    if (!inputCheck.safe) {
+      return res.json({
+        choices: [{
+          message: {
+            role: 'assistant',
+            content: 'Hmm, ayo kita fokus belajar ya! \u{1F989} Ada soal yang bisa Budi bantu?',
+          },
+        }],
+        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+        _filtered: true,
+      });
+    }
+  }
+
+  // --- Daily usage limits ---
+  const hasImage = messages && messages.some(m =>
+    Array.isArray(m.content) && m.content.some(c => c.type === 'image_url')
+  );
+
+  const usageRow = getOrCreateUsage(student_id);
+
+  if (hasImage && usageRow.image_count >= DAILY_IMAGE_LIMIT) {
+    return res.status(429).json({
+      error: 'Budi sudah capek hari ini! \u{1F634} Kamu bisa latihan pakai bank soal, atau coba lagi besok ya!',
+      limit_type: 'image',
+    });
+  }
+
+  if (usageRow.request_count >= DAILY_TEXT_LIMIT) {
+    return res.status(429).json({
+      error: 'Budi sudah capek hari ini! \u{1F634} Kamu bisa latihan pakai bank soal, atau coba lagi besok ya!',
+      limit_type: 'text',
+    });
   }
 
   try {
@@ -333,6 +471,18 @@ app.post('/api/chat', async (req, res) => {
     }
 
     const data = await response.json();
+
+    // --- Content safety: filter AI output ---
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      const outputCheck = filterOutput(data.choices[0].message.content);
+      if (!outputCheck.safe) {
+        data.choices[0].message.content = outputCheck.cleaned;
+      }
+    }
+
+    // Increment usage counter after successful response
+    incrementUsage(student_id, hasImage);
+
     res.json(data);
   } catch (error) {
     console.error('Server error:', error);
@@ -341,20 +491,104 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// API: Usage stats
+// ---------------------------------------------------------------------------
+app.get('/api/usage/:student_id', (req, res) => {
+  try {
+    const { student_id } = req.params;
+    const usage = getOrCreateUsage(student_id);
+
+    res.json({
+      student_id,
+      date: usage.date,
+      requests_used: usage.request_count,
+      requests_limit: DAILY_TEXT_LIMIT,
+      requests_remaining: Math.max(0, DAILY_TEXT_LIMIT - usage.request_count),
+      images_used: usage.image_count,
+      images_limit: DAILY_IMAGE_LIMIT,
+      images_remaining: Math.max(0, DAILY_IMAGE_LIMIT - usage.image_count),
+    });
+  } catch (error) {
+    console.error('Error getting usage:', error);
+    res.status(500).json({ error: 'Failed to get usage' });
+  }
+});
+
+app.get('/api/dashboard/usage', (req, res) => {
+  try {
+    const today = getTodayStr();
+
+    // Today's totals
+    const todayStats = db.prepare(`
+      SELECT COALESCE(SUM(request_count), 0) as total_requests,
+             COALESCE(SUM(image_count), 0) as total_images,
+             COUNT(DISTINCT student_id) as active_students
+      FROM usage WHERE date = ?
+    `).get(today);
+
+    // This week (last 7 days)
+    const weekStart = new Date();
+    weekStart.setDate(weekStart.getDate() - 6);
+    const weekStartStr = weekStart.toISOString().slice(0, 10);
+
+    const weekStats = db.prepare(`
+      SELECT COALESCE(SUM(request_count), 0) as total_requests,
+             COALESCE(SUM(image_count), 0) as total_images,
+             COUNT(DISTINCT student_id) as active_students
+      FROM usage WHERE date >= ?
+    `).get(weekStartStr);
+
+    // This month
+    const monthStart = today.slice(0, 7) + '-01';
+
+    const monthStats = db.prepare(`
+      SELECT COALESCE(SUM(request_count), 0) as total_requests,
+             COALESCE(SUM(image_count), 0) as total_images,
+             COUNT(DISTINCT student_id) as active_students
+      FROM usage WHERE date >= ?
+    `).get(monthStart);
+
+    // Estimated costs
+    const textCost = 0.01;
+    const imageCost = 0.03;
+
+    res.json({
+      today: {
+        ...todayStats,
+        estimated_cost: +(todayStats.total_requests * textCost + todayStats.total_images * imageCost).toFixed(2),
+      },
+      week: {
+        ...weekStats,
+        estimated_cost: +(weekStats.total_requests * textCost + weekStats.total_images * imageCost).toFixed(2),
+      },
+      month: {
+        ...monthStats,
+        estimated_cost: +(monthStats.total_requests * textCost + monthStats.total_images * imageCost).toFixed(2),
+      },
+    });
+  } catch (error) {
+    console.error('Error getting dashboard usage:', error);
+    res.status(500).json({ error: 'Failed to get usage stats' });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // API: Students
 // ---------------------------------------------------------------------------
 app.post('/api/students', (req, res) => {
   try {
-    const { name, grade, phone, parent_phone, parent_name, center_id } = req.body;
+    const { name, grade, phone, parent_phone, parent_name, center_id, pin } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'name is required' });
     }
 
+    const studentPin = pin || generateUniquePin();
+
     const result = db.prepare(`
-      INSERT INTO students (name, grade, phone, parent_phone, parent_name, center_id)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `).run(name, grade || null, phone || null, parent_phone || null, parent_name || null, center_id || null);
+      INSERT INTO students (name, grade, phone, parent_phone, parent_name, center_id, pin)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(name, grade || null, phone || null, parent_phone || null, parent_name || null, center_id || null, studentPin);
 
     const student = db.prepare('SELECT * FROM students WHERE id = ?').get(result.lastInsertRowid);
     res.status(201).json(student);
@@ -404,6 +638,93 @@ app.get('/api/students/:id/progress', (req, res) => {
   } catch (error) {
     console.error('Error getting progress:', error);
     res.status(500).json({ error: 'Failed to get progress' });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// API: Authentication (PIN-based)
+// ---------------------------------------------------------------------------
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { pin } = req.body;
+
+    if (!pin || pin.length !== 4) {
+      return res.status(400).json({ error: 'PIN harus 4 digit' });
+    }
+
+    const student = db.prepare('SELECT * FROM students WHERE pin = ?').get(pin);
+    if (!student) {
+      return res.status(401).json({ error: 'PIN salah, coba lagi ya!' });
+    }
+
+    // Create a new session record
+    const session = db.prepare(`
+      INSERT INTO sessions (student_id, started_at, last_activity)
+      VALUES (?, datetime('now'), datetime('now'))
+    `).run(student.id);
+
+    res.json({
+      student,
+      session_id: session.lastInsertRowid,
+    });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Login gagal' });
+  }
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  try {
+    const { session_id } = req.body;
+
+    if (!session_id) {
+      return res.status(400).json({ error: 'session_id is required' });
+    }
+
+    db.prepare(`
+      UPDATE sessions SET ended_at = datetime('now') WHERE id = ? AND ended_at IS NULL
+    `).run(session_id);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    res.status(500).json({ error: 'Logout gagal' });
+  }
+});
+
+app.get('/api/auth/verify/:pin', (req, res) => {
+  try {
+    const { pin } = req.params;
+
+    const student = db.prepare('SELECT id, name, grade, stars, level, pin FROM students WHERE pin = ?').get(pin);
+    if (!student) {
+      return res.status(404).json({ error: 'PIN tidak ditemukan' });
+    }
+
+    res.json({ name: student.name, grade: student.grade });
+  } catch (error) {
+    console.error('Error verifying PIN:', error);
+    res.status(500).json({ error: 'Verifikasi gagal' });
+  }
+});
+
+// Reset PIN for a student
+app.post('/api/students/:id/reset-pin', (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const student = db.prepare('SELECT * FROM students WHERE id = ?').get(id);
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    const newPin = generateUniquePin();
+    db.prepare('UPDATE students SET pin = ? WHERE id = ?').run(newPin, id);
+
+    res.json({ id: Number(id), pin: newPin });
+  } catch (error) {
+    console.error('Error resetting PIN:', error);
+    res.status(500).json({ error: 'Failed to reset PIN' });
   }
 });
 

@@ -47,7 +47,11 @@ class AuthGate extends StatelessWidget {
   Widget build(BuildContext context) {
     final student = context.watch<StudentProvider>();
     if (student.isLoggedIn) {
-      return const HomeScreen();
+      // Wrap in Listener to reset idle timer on any touch
+      return Listener(
+        onPointerDown: (_) => student.resetIdleTimer(),
+        child: const HomeScreen(),
+      );
     }
     return const LoginScreen();
   }

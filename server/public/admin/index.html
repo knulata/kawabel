@@ -167,6 +167,32 @@
           </div>
         </div>
 
+        <!-- API Usage Stats -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
+          <h3 class="font-semibold text-gray-800 mb-4">Penggunaan API</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            <div class="bg-orange-50 rounded-lg p-4 border border-orange-100">
+              <p class="text-xs text-orange-600 font-medium uppercase tracking-wide mb-1">Hari Ini</p>
+              <p class="text-2xl font-bold text-gray-800" id="usageToday">-</p>
+              <p class="text-xs text-gray-500 mt-1">request (<span id="usageTodayImages">-</span> gambar)</p>
+              <p class="text-xs text-orange-600 mt-1 font-medium">~$<span id="usageTodayCost">0.00</span></p>
+            </div>
+            <div class="bg-orange-50 rounded-lg p-4 border border-orange-100">
+              <p class="text-xs text-orange-600 font-medium uppercase tracking-wide mb-1">Minggu Ini</p>
+              <p class="text-2xl font-bold text-gray-800" id="usageWeek">-</p>
+              <p class="text-xs text-gray-500 mt-1">request (<span id="usageWeekImages">-</span> gambar)</p>
+              <p class="text-xs text-orange-600 mt-1 font-medium">~$<span id="usageWeekCost">0.00</span></p>
+            </div>
+            <div class="bg-orange-50 rounded-lg p-4 border border-orange-100">
+              <p class="text-xs text-orange-600 font-medium uppercase tracking-wide mb-1">Bulan Ini</p>
+              <p class="text-2xl font-bold text-gray-800" id="usageMonth">-</p>
+              <p class="text-xs text-gray-500 mt-1">request (<span id="usageMonthImages">-</span> gambar)</p>
+              <p class="text-xs text-orange-600 mt-1 font-medium">~$<span id="usageMonthCost">0.00</span></p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400">Estimasi biaya: ~$0.01/teks, ~$0.03/gambar. Limit per siswa: 30 teks + 10 gambar/hari.</p>
+        </div>
+
         <!-- Quick Actions -->
         <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
           <h3 class="font-semibold text-gray-800 mb-4">Aksi Cepat</h3>
@@ -291,6 +317,7 @@
 
       loadCharts(stats);
       loadRecentActivity();
+      loadUsageStats();
     }
 
     function loadCharts(stats) {
@@ -373,6 +400,31 @@
           <span class="text-xs text-gray-400 whitespace-nowrap">${item.time}</span>
         </div>
       `).join('');
+    }
+
+    async function loadUsageStats() {
+      const usage = await apiFetch('/api/dashboard/usage');
+      if (usage) {
+        document.getElementById('usageToday').textContent = usage.today.total_requests;
+        document.getElementById('usageTodayImages').textContent = usage.today.total_images;
+        document.getElementById('usageTodayCost').textContent = usage.today.estimated_cost.toFixed(2);
+
+        document.getElementById('usageWeek').textContent = usage.week.total_requests;
+        document.getElementById('usageWeekImages').textContent = usage.week.total_images;
+        document.getElementById('usageWeekCost').textContent = usage.week.estimated_cost.toFixed(2);
+
+        document.getElementById('usageMonth').textContent = usage.month.total_requests;
+        document.getElementById('usageMonthImages').textContent = usage.month.total_images;
+        document.getElementById('usageMonthCost').textContent = usage.month.estimated_cost.toFixed(2);
+      } else {
+        // Fallback: show zeros
+        ['usageToday','usageWeek','usageMonth'].forEach(id => {
+          document.getElementById(id).textContent = '0';
+        });
+        ['usageTodayImages','usageWeekImages','usageMonthImages'].forEach(id => {
+          document.getElementById(id).textContent = '0';
+        });
+      }
     }
 
     // Init

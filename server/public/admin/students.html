@@ -79,10 +79,16 @@
           <h1 class="text-2xl font-bold text-gray-800">Daftar Siswa</h1>
           <p class="text-gray-500">Kelola data siswa</p>
         </div>
-        <button onclick="showRegisterModal()" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-4 py-2 rounded-lg transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          Tambah Siswa
-        </button>
+        <div class="flex gap-2">
+          <button onclick="printPinCards()" class="inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary-light font-semibold px-4 py-2 rounded-lg transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Cetak Kartu PIN
+          </button>
+          <button onclick="showRegisterModal()" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-4 py-2 rounded-lg transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Tambah Siswa
+          </button>
+        </div>
       </div>
 
       <!-- Filters -->
@@ -109,6 +115,7 @@
             <thead class="bg-gray-50 border-b">
               <tr>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nama</th>
+                <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">PIN</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Kelas</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Bintang</th>
                 <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase hidden md:table-cell">Terakhir Aktif</th>
@@ -117,7 +124,7 @@
               </tr>
             </thead>
             <tbody id="studentsTableBody" class="divide-y divide-gray-100">
-              <tr><td colspan="6" class="px-6 py-8 text-center text-gray-400">Memuat data...</td></tr>
+              <tr><td colspan="7" class="px-6 py-8 text-center text-gray-400">Memuat data...</td></tr>
             </tbody>
           </table>
         </div>
@@ -271,6 +278,7 @@
         name: s.name,
         grade: s.grade,
         stars: s.stars || 0,
+        pin: s.pin || '-',
         lastActive: s.lastActive || s.last_active || s.created_at,
         phone: s.phone,
         parentName: s.parentName || s.parent_name,
@@ -282,7 +290,7 @@
     function renderStudents(students) {
       const tbody = document.getElementById('studentsTableBody');
       if (students.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-8 text-center text-gray-400">Tidak ada siswa ditemukan</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="px-6 py-8 text-center text-gray-400">Tidak ada siswa ditemukan</td></tr>';
         return;
       }
       tbody.innerHTML = students.map(s => {
@@ -295,12 +303,16 @@
                 <span class="font-medium text-gray-800">${s.name}</span>
               </div>
             </td>
+            <td class="px-6 py-4">
+              <span class="font-mono text-lg font-bold text-gray-800 bg-gray-100 px-2 py-1 rounded">${s.pin}</span>
+            </td>
             <td class="px-6 py-4 text-gray-600">Kelas ${s.grade}</td>
             <td class="px-6 py-4"><span class="text-yellow-500">${'&#9733;'.repeat(Math.min(5, Math.floor(s.stars/10)))}</span> <span class="text-sm text-gray-500">${s.stars}</span></td>
             <td class="px-6 py-4 text-gray-500 text-sm hidden md:table-cell">${lastActive}</td>
             <td class="px-6 py-4 text-gray-500 text-sm hidden lg:table-cell">${s.parentPhone || '-'}</td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 flex gap-2">
               <button onclick="event.stopPropagation(); showDetail(${s.id})" class="text-primary hover:text-primary-dark text-sm font-medium">Detail</button>
+              <button onclick="event.stopPropagation(); resetPin(${s.id}, '${s.name}')" class="text-orange-500 hover:text-orange-700 text-sm font-medium">Reset PIN</button>
             </td>
           </tr>`;
       }).join('');
@@ -342,30 +354,116 @@
           body: JSON.stringify(data),
         });
         if (res.ok) {
+          const student = await res.json();
           closeRegisterModal();
           loadStudents();
-          showToast('Siswa berhasil didaftarkan!');
+          showPinModal(student.name, student.pin);
         } else {
           // Fallback: add locally
           data.id = Date.now();
           data.stars = 0;
+          data.pin = String(1000 + Math.floor(Math.random() * 9000));
           data.lastActive = new Date().toISOString();
           data.avgScore = 0;
           allStudents.push(data);
           renderStudents(allStudents);
           closeRegisterModal();
-          showToast('Siswa ditambahkan (lokal)');
+          showPinModal(data.name, data.pin);
         }
       } catch {
         data.id = Date.now();
         data.stars = 0;
+        data.pin = String(1000 + Math.floor(Math.random() * 9000));
         data.lastActive = new Date().toISOString();
         data.avgScore = 0;
         allStudents.push(data);
         renderStudents(allStudents);
         closeRegisterModal();
-        showToast('Siswa ditambahkan (lokal)');
+        showPinModal(data.name, data.pin);
       }
+    }
+
+    function showPinModal(name, pin) {
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
+      modal.innerHTML = `
+        <div class="bg-white rounded-xl w-full max-w-sm text-center p-8">
+          <div class="text-4xl mb-4">&#9989;</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Siswa Berhasil Didaftarkan!</h3>
+          <p class="text-gray-600 mb-4">${name}</p>
+          <p class="text-sm text-gray-500 mb-2">PIN untuk login:</p>
+          <div class="text-5xl font-mono font-bold text-primary tracking-[0.3em] bg-green-50 rounded-xl py-4 mb-4">${pin}</div>
+          <p class="text-xs text-gray-400 mb-6">Catat PIN ini dan berikan ke siswa</p>
+          <button onclick="this.closest('.fixed').remove()" class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2 rounded-lg transition">Tutup</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    async function resetPin(id, name) {
+      if (!confirm('Reset PIN untuk ' + name + '?')) return;
+      try {
+        const res = await fetch('/api/students/' + id + '/reset-pin', { method: 'POST' });
+        if (res.ok) {
+          const data = await res.json();
+          showPinModal(name, data.pin);
+          loadStudents();
+        } else {
+          showToast('Gagal reset PIN');
+        }
+      } catch {
+        showToast('Gagal reset PIN');
+      }
+    }
+
+    function printPinCards() {
+      const students = allStudents.filter(s => s.pin && s.pin !== '-');
+      if (students.length === 0) {
+        showToast('Tidak ada siswa dengan PIN');
+        return;
+      }
+      const w = window.open('', '_blank');
+      w.document.write(`<!DOCTYPE html><html><head><title>Kartu PIN Siswa</title>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body { font-family: 'Nunito', sans-serif; }
+          @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+          .grid { display: flex; flex-wrap: wrap; padding: 10mm; gap: 5mm; }
+          .card {
+            width: 85mm; height: 54mm;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            page-break-inside: avoid;
+            background: linear-gradient(135deg, #f0fff0, #fff);
+          }
+          .card .owl { font-size: 28px; margin-bottom: 2px; }
+          .card .brand { font-size: 14px; font-weight: 900; color: #388E3C; letter-spacing: 1px; }
+          .card .name { font-size: 16px; font-weight: 700; color: #333; margin: 6px 0 2px; }
+          .card .grade { font-size: 11px; color: #666; margin-bottom: 6px; }
+          .card .pin-label { font-size: 10px; color: #888; }
+          .card .pin { font-family: monospace; font-size: 32px; font-weight: 900; color: #4CAF50; letter-spacing: 8px; }
+          .no-print { text-align: center; padding: 16px; }
+          @media print { .no-print { display: none; } }
+        </style>
+      </head><body>
+        <div class="no-print"><button onclick="window.print()" style="font-size:16px;padding:8px 24px;background:#4CAF50;color:#fff;border:none;border-radius:8px;cursor:pointer;">Cetak</button></div>
+        <div class="grid">
+          ${students.map(s => `
+            <div class="card">
+              <div class="owl">&#x1F989;</div>
+              <div class="brand">kawabel</div>
+              <div class="name">${s.name}</div>
+              <div class="grade">Kelas ${s.grade}</div>
+              <div class="pin-label">PIN</div>
+              <div class="pin">${s.pin}</div>
+            </div>
+          `).join('')}
+        </div>
+      </body></html>`);
+      w.document.close();
     }
 
     async function showDetail(id) {
@@ -379,6 +477,7 @@
       document.getElementById('detailAvg').textContent = (student.avgScore || 0) + '%';
 
       document.getElementById('detailInfo').innerHTML = `
+        <p><strong>PIN:</strong> <span class="font-mono text-lg font-bold">${student.pin || '-'}</span></p>
         <p><strong>HP Siswa:</strong> ${student.phone || '-'}</p>
         <p><strong>Orang Tua:</strong> ${student.parentName || '-'}</p>
         <p><strong>HP Orang Tua:</strong> ${student.parentPhone || '-'}</p>
